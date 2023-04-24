@@ -16,8 +16,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
+# tmp file extensions extensions
 *.so
+*.c
+*.csv
 
 # Distribution / packaging
 .Python
