@@ -3,6 +3,7 @@
 from django.db import models
 import csv
 import json
+import pandas as pd
 from .validators import validate_file_extension
 
 class Document(models.Model):
@@ -19,6 +20,12 @@ class Document(models.Model):
         print(self.document.path)
         self.json_data = make_json(self.document.path)
 
+    def json_to_csv(self):
+        df = pd.read_json(self.json_data)
+        df = df.transpose()
+        # print(df)
+        df.to_csv('downloads/tmp.csv', encoding='utf-8', index=False, header=True)
+
     def __str__(self):
         return self.description
     
@@ -26,6 +33,7 @@ class Document(models.Model):
  
 # Function to convert a CSV to JSON
 # Takes the file paths as arguments
+# https://www.geeksforgeeks.org/convert-csv-to-json-using-python/
 def make_json(csv_file_path):
      
     # create a dictionary
