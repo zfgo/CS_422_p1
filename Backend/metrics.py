@@ -1,4 +1,4 @@
-# NAME : accuracy.py
+# NAME : metrics.py
 # DATE : 4/20/2023
 # DESC : module for comparing various model accuracy metrics between (actual, predicted) data
 # AUTHORS : Kareem Taha

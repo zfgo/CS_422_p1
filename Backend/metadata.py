@@ -1,4 +1,4 @@
-# NAME : accuracy.py
+# NAME : metadata.py
 # DATE : 4/20/2023
 # DESC : module declaring TimeSeries/Set objects
 # AUTHORS : Kareem Taha
