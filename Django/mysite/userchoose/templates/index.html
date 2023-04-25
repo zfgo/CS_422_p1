@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Numsuite Welcome</title>
+<link rel="icon" type="image/x-icon" href="favicon.png">
+	<style>
+		body {
+			background-color: black;
+			
+		}
+		
+		.but {
+			margin-left: -2%;
+		}
+		
+		
+		.responsive{
+		   max-width:100%;
+		   max-height:100%;
+		 }
+
+		.center{
+		  position: absolute;
+		  top: 50%;
+		  left: 50%; 
+		  transform: translate(-50%, -50%);
+		}
+
+		.parent{
+		  position: relative;
+			margin-top: 10%;
+			margin-left: 20%;
+		}
+		
+		#logo {
+			position: fixed;
+			margin-top: 31%;
+			margin-left: 2%;
+		}
+		
+		#ti {
+			margin-left: -13.5%;
+		}
+		
+		.but:hover {
+			filter: hue-rotate(360deg);
+			transition: filter 3s;
+			cursor: pointer;
+		}
+		
+		.but:not(:hover) {
+			transition: filter 0s;
+		}
+		
+		#co {
+			margin-top: 10%;
+		
+		}
+		
+		#pa {
+			margin-top: 20%;
+			
+		}
+		
+		#ad {
+			margin-top: 30%;
+			
+		}
+
+	</style>
+</head>
+
+<body>
+	<div class="parent">
+		
+		<img id="ti" class="responsive center" src="static/img/whoareyou3.png" width="30%" alt="Who are you?"><br>
+		<a id="co" class="responsive center but" href="contributor.html"><img src="static/img/contributor2.png" width="50%"  alt="contributor" onmouseover="this.src='static/img/contributorhighlight1.png'"
+	onmouseout="this.src='static/img/contributor2.png'"></a><br>
+		<a id="pa" class="responsive center but" href="datascientist.html"><img src="static/img/participant2.png" width="50%" alt="participant1" onmouseover="this.src='static/img/participanthighlight1.png'"
+	onmouseout="this.src='static/img/participant2.png'"></a><br>
+		<a id="ad" class="responsive center but" href="admin.html"><img src="static/img/admin2.png" width="50%" alt="admin" onmouseover="this.src='static/img/adminhighlight1.png'"
+	onmouseout="this.src='static/img/admin2.png'"></a>
+		
+	</div>
+	<img id="logo" class="responsive" src="static/img/numsuite.png" width="10%" alt="logo">
+	
+	<script>
+	</script>
+</body>
+</html>
