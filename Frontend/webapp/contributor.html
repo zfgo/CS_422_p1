@@ -79,7 +79,6 @@
 			margin-top: 20%;
 			display: none;
 			
-			
 		}
 		
 		#choose {
@@ -92,6 +91,10 @@
 			margin-left: 2%;
 		}
 		
+		#chosenfileslabel {
+			transition: textContent 3s;
+		}
+		
 		
 	</style>
 </head>
@@ -99,7 +102,8 @@
 <body>
 	<div class="parent">
 	<div class="file-upload">
-		<form id="form" action="/estone3/webapp/contributor.py" method="post">
+		<form id="form" enctype="multipart/form-data" onsubmit="showSuccess(); uploadSuccess(); return false;">
+		<!--    must add to above line:	method="post action="#"-->
 			<input class="file-upload__input responsive center" type="file" accept=".json,.csv,.xlsx,.xls" name="myFile[]" id="myFile" onchange="showUpload()" multiple>
 			<button id="choose" class="file-upload__button responsive center" type="button"><img src="contributorchoose.png" alt="Choose files" width="300" onmouseover="this.src='contributorchoosehighlight.png'"
 		onmouseout="this.src='contributorchoose.png'"></button>
@@ -107,7 +111,9 @@
 			<span id="scroll" class="responsive center"></span>
 			<button id="upload" class="file-upload__button responsive center" type="submit" value="Submit"><img src="contributorupload.png" alt="Upload selected files" width="300" onmouseover="this.src='contributoruploadhighlight.png'"
 		onmouseout="this.src='contributorupload.png'"></button>
+			
 		</form>
+		
 	</div>
 	</div>
 	<img id="logo" class="responsive" src="numsuite.png" width="10%" alt="logo">
@@ -131,17 +137,19 @@
 					//alert("isovaflown");
 				//}
 			})
-			$('#upload').click(function(){
+			/*$('#upload').click(function(){
 				alert("uploaded");
-			});
+			});*/
 			if(filenameList.length == 0) {
 				document.getElementById("upload").style.display = "none";
 			}
 			
 			/*document.getElementById('form').addEventListener('submit', function(handle) {
-				handle.preventDefault();
-				label.textContent = "Files successfully uploaded"
-			})*/
+				label.textContent = "Files successfully uploaded";
+				alert("upped");
+				handle.stopImmediatePropagation()
+				handle.preventDefault()
+			});*/
         
 			/*if(filenameList.length > 0) {
 			//document.write(filenameList.length);
@@ -152,7 +160,18 @@
 			document.getElementById("upload").style.display = "block";
 		}
 		
+		function uploadSuccess() {
+			label = document.getElementById("chosenfileslabel");
+			label.textContent = "Upload successful";
+			document.getElementById("upload").style.display = "none";
+			//label.opacity = 0;
+		}
 		
+		/*function showSuccess() {
+        document.getElementById('success').innerHTML = "SUCCESS";
+    }*/
+		
+	
 		
 		
 	</script>
