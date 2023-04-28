@@ -15,13 +15,13 @@ def model_form_upload(request):
             # save it to the DB 
             doc_model = form.save(commit=False)
 
-            # TODO: we will convert the document to a json
-
             # now save the document model to the DB
             doc_model.save() # this makes the file's path to be accurate
             doc_model.to_json() # convert the file to json
             doc_model.save() # save the Document model again
 
+            # TODO: this line should be in a different app where the 
+            # participant downloads the data
             doc_model.json_to_csv()
 
             return redirect('/polls/')
@@ -31,9 +31,3 @@ def model_form_upload(request):
     return render(request, 'zach_test/upload.html', {
         'form': form
     })
-
-
-"""
-document = form.model
-
-"""

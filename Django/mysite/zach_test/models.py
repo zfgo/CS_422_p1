@@ -23,12 +23,13 @@ class Document(models.Model):
     def json_to_csv(self):
         df = pd.read_json(self.json_data)
         df = df.transpose()
-        # print(df)
+
+        # TODO: rename the file so that it's name is the same as the 
+        # name it got uploaded as (but with the right file extension)
         df.to_csv('downloads/tmp.csv', encoding='utf-8', index=False, header=True)
 
     def __str__(self):
         return self.description
-    
  
  
 # Function to convert a CSV to JSON
