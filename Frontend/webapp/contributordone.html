@@ -110,10 +110,9 @@
 
 		
 		#icon {
-			position: absolute;
-			margin: 20%;
-			margin-top: -15%;
-			margin-left: 28%;
+			margin-top: -12%;
+			width: 15%;
+			max-height: 900%;
 			 animation-duration: 3s;
 			  animation-name: shift;
 			  animation-iteration-count: infinite;
@@ -128,11 +127,11 @@
 
 <body>
 	<div class="parent">
-		<img id="icon" src="ccheck.png" alt="done" width="150">
-		<h1 class="center responsive">Set successfully uploaded.</h1>
+		
 	<div class="file-upload">
-		<!--    must add to above line:	method="post" action="#"-->
-			
+			<img id="icon" src="ccheck.png" class="file-upload__button responsive center" alt="done">
+
+			<h1 class="center responsive">Set successfully uploaded.</h1>
 			<a href="contributor.html"><button id="more" class="file-upload__button responsive center" type="button"><img src="contributormore.png" alt="Upload another set" width="300" onmouseover="this.src='contributormorehighlight.png'"
 		onmouseout="this.src='contributormore.png'"></button></a>
 			<a href="userchoose.html"><button id="home" class="file-upload__button responsive center" type="button"><img src="contributorhome.png" alt="Return to home" width="300" onmouseover="this.src='contributorhomehighlight.png'"
