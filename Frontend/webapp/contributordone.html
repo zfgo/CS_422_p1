@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Numsuite | Contributor Page</title>
+<link rel="icon" type="image/x-icon" href="favicon.png">
+	<style>
+		
+		@font-face {
+			font-family: myFont;
+			src:url("MundialRegular.otf");
+}
+		body {
+			color: #6ab2e9;
+			font-family: myFont;
+			background-color: black;
+		}
+		.file-upload {
+			display: inline-flex;
+			align-items: center;
+			font-size: 15px;
+		}
+		.file-upload__input {
+			display: none;
+		}
+		
+		.file-upload__button {
+			-webkit-appearance: none;
+			background: black;
+			border: 2px solid black;
+			border-radius: 4px;
+			outline: none;
+			padding: 0.5em 0.8em;
+			margin-right: 15px;
+			cursor: pointer;
+		}
+		
+		.file-upload__label {
+			text-align: center;
+			background:linear-gradient(#222530, black);
+			border-radius: 20px;
+			max-width: 1000px;
+			font-size: 0.97em;
+			color: #6ab2e9;
+			text-overflow:ellipsis;
+			overflow: scroll;
+			line-height: 140%;
+			font-family: myFont;
+			margin-top: 14%; 
+			padding-top: 1%;
+			padding-bottom: 4%;
+			padding-left: 15px;
+			padding-right: 15px;
+			z-index: -1;
+		}
+		
+		.responsive{
+		   max-width:100%;
+		   max-height:100%;
+		 }
+
+		.center{
+		  position: absolute;
+		  top: 50%;
+		  left: 35%; 
+		  transform: translate(-50%, -50%);
+		}
+
+		.parent{
+		  position: relative;
+			margin-top: 20%;
+			margin-left: 20%;
+		}
+		
+		button:hover {
+			filter: hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		#home {
+			margin-top: 11%;
+			
+			
+		}
+		
+		#logo {
+			position: fixed;
+			margin-top: 23.7%;
+			margin-left: 2%;
+		}
+
+		
+		h1 {
+			text-align: center;
+			position: absolute;
+			margin-top: -5%;
+			z-index: 80;
+		}
+		
+		@keyframes shift {
+		  from {
+			filter: hue-rotate(0deg);
+			  
+		  }
+
+		  to {
+			filter: hue-rotate(360deg);
+		  }
+		}
+
+		
+		#icon {
+			position: absolute;
+			margin: 20%;
+			margin-top: -15%;
+			margin-left: 28%;
+			 animation-duration: 3s;
+			  animation-name: shift;
+			  animation-iteration-count: infinite;
+			  animation-direction: alternate;
+		}
+		
+		
+		
+		
+	</style>
+</head>
+
+<body>
+	<div class="parent">
+		<img id="icon" src="ccheck.png" alt="done" width="150">
+		<h1 class="center responsive">Set successfully uploaded.</h1>
+	<div class="file-upload">
+		<!--    must add to above line:	method="post" action="#"-->
+			
+			<a href="contributor.html"><button id="more" class="file-upload__button responsive center" type="button"><img src="contributormore.png" alt="Upload another set" width="300" onmouseover="this.src='contributormorehighlight.png'"
+		onmouseout="this.src='contributormore.png'"></button></a>
+			<a href="userchoose.html"><button id="home" class="file-upload__button responsive center" type="button"><img src="contributorhome.png" alt="Return to home" width="300" onmouseover="this.src='contributorhomehighlight.png'"
+		onmouseout="this.src='contributorhome.png'"></button></a>
+		
+		
+		
+	</div>
+	</div>
+	<img id="logo" class="responsive" src="numsuite.png" width="10%" alt="logo">
+	
+	<script>
+		
+	</script>
+</body>
+</html>
