@@ -1,8 +1,8 @@
 # created 2023-04-22
 # updated 2023-04-23 : convert uploaded files to json and save them in 
-#   the DB
+#   the DB.
 # updated 2023-04-29 : create view for download page, list all 
-#   available files for downloand
+#   available files for download.
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, FileResponse
 from .models import Document
