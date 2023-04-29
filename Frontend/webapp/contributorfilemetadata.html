@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Numsuite | Contributor Page</title>
+	<style>
+		@font-face {
+			font-family: myFont;
+			src:url("MundialRegular.otf");
+		}
+		
+		.responsive{
+		   max-width:100%;
+		   max-height:100%;
+		 }
+
+		.center{
+		  position: absolute;
+		  top: 50%;
+		  left: 35%; 
+		  transform: translate(-50%, -50%);
+		}
+		
+		body {
+			--border-radius: 54px;
+			margin: 0;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 18px;
+			background: black;
+			color: #6ab2e9;
+			
+		}
+		
+		.container {
+			width: 400px;
+			max-width: 400px;
+			margin: 1rem;
+			padding: 2rem;
+			box-shadow: 0 0 50px rgba(0, 170, 255, 0.9);
+			border-radius: var(--border-radius);
+			background: black;
+		}
+		
+		.container, .form__input, .form__button {
+			font-family: myFont;
+		}
+		
+		.form--hidden {
+			display: none;
+		}
+		
+		.form > *:first-child {
+			margin-top: 0;
+		}
+		.form > *:last-child {
+			margin-top: 0;
+		}
+		
+		.form__message {
+			text-align: center;
+			margin-bottom: 1rem;
+		}
+		
+		.form__message--success {
+			color: green;
+		}
+		
+		.form__message--error {
+			color: red;
+		}
+		
+		.form__title {
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+		
+		.form__input-group {
+			margin-bottom: 1rem;
+		}
+		
+		.form__input {
+			display: block;
+			color: #8BE0FF;
+			width: 100%;
+			padding: 0.75rem;
+			box-sizing: border-box;
+			border-radius: var(--border-radius);
+			border: 3px solid #6ab2e9;
+			outline: none;
+			background:#002B3B;
+			transition: background 0.2s, border-color 0.2s;
+		}
+		
+			.form__input:hover {
+
+			filter: hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		.form__input:focus {
+			color:#8BE0FF;
+			border-color:#8ACBFC;
+			background:#225972;
+		}
+		
+		.form__input--error {
+			color: red;
+			border-color: red;
+		}
+		
+		.form__input-error-message {
+			margin-top: 0.5rem;
+			font-size: 0.85rem;
+			color: red;
+		}
+		
+		.form__button {
+			width: 50%;
+			padding: 1rem 2rem;
+			font-weight: bold;
+			font-size: 1.1rem;
+			color: #6ab2e9;
+			border: 3px solid #6ab2e9;
+			border-radius: var(--border-radius);
+			outline: none;
+			cursor: pointer;
+			background: black;
+			text-align: center;
+			margin-left: 25%;
+		}
+		
+		.form__button:hover {
+			filter:hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		.form__button:active {
+			transform: scale(0.98);
+		}
+		
+		.form__text {
+			text-align: center;
+		}
+		
+		.form__link {
+			color: pink;
+			text-decoration: none;
+			cursor: pointer;
+		}
+		
+		.form__link:hover {
+			text-decoration: underline;
+		}
+		
+		h4 {
+			font-size: 16px;
+			color:#82BEEC;
+			border-color:#8ACBFC;
+			background:#002B3B;
+			padding: 0.5em 0.7em;
+			max-width: 600px;
+			border-radius: 20px;
+			overflow: scroll;
+			
+		}
+		
+		@keyframes shift {
+		  from {
+			filter: hue-rotate(0deg);
+			  
+		  }
+
+		  to {
+			filter: hue-rotate(360deg);
+		  }
+		}
+
+		h4 {
+			
+		  animation-duration: 50s;
+		  animation-name: shift;
+		  animation-iteration-count: infinite;
+		  animation-direction: alternate;
+			
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		
+		<form class="form" id="metadata"> 
+			<!--    must add to above line:	method="post" action="#"-->
+			<h1 class="form__title" id="formtitle">File Metadata</h1>
+			<h4 class="form__title" id="filetitle"></h4>
+			<div class="form__message form__message--error"></div>
+			<div class="form__input-group">
+				<input style="font-size:15px;" type="text" class="form__input" autofocus placeholder="Name of time series">
+				<div class="form__input-error-message"></div>
+			</div>
+			<div class="form__input-group">
+				<input style="font-size:15px;" type="text" class="form__input" autofocus placeholder="Time series description/keywords">
+				<div class="form__input-error-message"></div>
+			</div>
+			<div class="form__input-group">
+				<input style="font-size:15px;" type="text" class="form__input" autofocus placeholder="Units">
+				<div class="form__input-error-message"></div>
+			</div>
+			<div class="form__input-group">
+				<input style="font-size:15px;" type="number" min="1" class="form__input" autofocus placeholder="Column of time variable">
+				<div class="form__input-error-message"></div>
+			</div>
+			<div class="form__input-group">
+				<input style="font-size:15px;" type="number" class="form__input" autofocus placeholder="Vector size">
+				<div class="form__input-error-message"></div>
+			</div>
+			<div class="form__input-group">
+				<input style="font-size:15px;" type="number" class="form__input" autofocus placeholder="Length">
+				<div class="form__input-error-message"></div>
+			</div>
+			<div class="form__input-group"> <!--FLOAT-->
+				<input style="font-size:15px; color:white;" type="number" step="any" class="form__input" autofocus placeholder="Sampling period">
+				<div class="form__input-error-message"></div>
+			</div>
+		    <button style="font-size:20px;" class="form__button" type="submit" >Continue</button>
+			<!--<p id="filenames"></p>-->
+		</form>
+	</div>
+	
+	<script>
+		
+		/*var l = document.getElementById('filenames');
+		for (var i = 0; i < inp.files.length; ++i) {
+		  var name = inp.files.item(i).name;
+		  "file name: " + name;
+		}*/
+		//const params = new Proxy(new URLSearchParams(window.location.search), {
+		//  get: (searchParams, prop) => searchParams.get(prop),
+		//});
+		// Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+		//let count = params.filecount; //number of files uploaded
+		//let myFiles = params.files; //list of filenames
+		const params = new URLSearchParams(window.location.search);
+		/*var i = 0;
+		const fnames = [];
+		for(const [i, val] of params.values()) {
+			if(i>0) {
+				fnames[i] = val;
+				
+			}
+		}
+		params.getAll('files');
+		alert(params.get('files[1]'));
+		//alert(params);
+		*/
+		var currentfile = 0;
+		const fnames = [];
+		var ind = 0;
+		var arrStr = window.location.search.split(/[=&]/);
+		//alert(arrStr);
+		
+		for(var i = 0; i < arrStr.length; i=i+1) {
+			if(i > 2 && i % 2 == 1) {
+				fnames[ind] = arrStr[i];
+				ind = ind + 1;
+			}
+		}
+		//alert(fnames); //yay
+		document.getElementById("filetitle").innerHTML = fnames[currentfile];
+		document.getElementById("formtitle").innerHTML = "File Metadata  (" + (currentfile+1) + "/" + arrStr[1] + ")";
+		
+		
+		document.getElementById("metadata").addEventListener("submit", function(event) { //construct query string and redirect
+				event.preventDefault(); // prevent the default form submission
+				//event.stopImmediatePropagation();
+				if(currentfile + 1 != arrStr[1]) { //there are still files left
+				currentfile = currentfile + 1;
+				document.getElementById("filetitle").innerHTML = fnames[currentfile];
+				document.getElementById("formtitle").innerHTML = "File Metadata  (" + (currentfile+1) + "/" + arrStr[1] + ")";
+			} else { //at last file
+				alert("done");
+			}
+		});
+		/*function nxtFile() {
+			if(currentfile + 1 != arrStr[1]) { //there are still files left
+				currentfile = currentfile + 1;
+				document.getElementById("filetitle").innerHTML = fnames[currentfile];
+				document.getElementById("formtitle").innerHTML = "File Metadata  (" + (currentfile+1) + "/" + arrStr[1] + ")";
+			} else { //at last file
+				alert("done");
+			}
+		}*/
+	</script>
+</body>
+</html>

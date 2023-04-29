@@ -185,7 +185,7 @@
 		function setFormMessage(formElement, type, msg) {
 			const msgElem = formElement.querySelector(".form__message");
 			msgElem.textContent = msg;
-			msgElem.classList.remove("form__message--success", "form__messahe--error");
+			msgElem.classList.remove("form__message--success", "form__message--error");
 			msgElem.classList.add(`form__message--${type}`);
 		}
 		
