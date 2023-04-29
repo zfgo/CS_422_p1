@@ -1,5 +1,7 @@
 # created 2023-04-22
 # updated 2023-04-23 : add to_json fxn
+# updated 2023-04-29 : add id to the Document model (used to get the 
+#   correct file during download)
 from django.db import models
 import csv
 import json
@@ -12,6 +14,7 @@ class Document(models.Model):
     document = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])
     uploaded_at = models.DateTimeField(auto_now_add=True)
     json_data = models.JSONField(null=True)
+    id = models.BigAutoField(primary_key=True)
 
     def to_json(self):
         # TODO: figure out the file type
