@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Numsuite | Contributor Page</title>
+	<style>
+		@font-face {
+			font-family: myFont;
+			src:url("MundialRegular.otf");
+		}
+		
+		body {
+			--border-radius: 54px;
+			margin: 0;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 18px;
+			background: black;
+			color: #6ab2e9;
+			
+		}
+		
+		.container {
+			width: 400px;
+			max-width: 400px;
+			margin: 1rem;
+			padding: 2rem;
+			box-shadow: 0 0 50px rgba(0, 170, 255, 0.9);
+			border-radius: var(--border-radius);
+			background: black;
+		}
+		
+		.container, .form__input, .form__button {
+			font-family: myFont;
+		}
+		
+		.form--hidden {
+			display: none;
+		}
+		
+		.form > *:first-child {
+			margin-top: 0;
+		}
+		.form > *:last-child {
+			margin-top: 0;
+		}
+		
+		.form__message {
+			text-align: center;
+			margin-bottom: 1rem;
+		}
+		
+		.form__message--success {
+			color: green;
+		}
+		
+		.form__message--error {
+			color: red;
+		}
+		
+		.form__title {
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+		
+		.form__input-group {
+			margin-bottom: 1rem;
+		}
+		
+		.form__input {
+			display: block;
+			color: #8BE0FF;
+			width: 100%;
+			padding: 0.75rem;
+			box-sizing: border-box;
+			border-radius: var(--border-radius);
+			border: 3px solid #6ab2e9;
+			outline: none;
+			background:#002B3B;
+			transition: background 0.2s, border-color 0.2s;
+		}
+		
+			.form__input:hover {
+
+			filter: hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		.form__input:focus {
+			color:#8BE0FF;
+			border-color:#8ACBFC;
+			background:#225972;
+		}
+		
+		.form__input--error {
+			color: red;
+			border-color: red;
+		}
+		
+		.form__input-error-message {
+			margin-top: 0.5rem;
+			font-size: 0.85rem;
+			color: red;
+		}
+		
+		.form__button {
+			width: 50%;
+			padding: 1rem 2rem;
+			font-weight: bold;
+			font-size: 1.1rem;
+			color: #6ab2e9;
+			border: 3px solid #6ab2e9;
+			border-radius: var(--border-radius);
+			outline: none;
+			cursor: pointer;
+			background: black;
+			text-align: center;
+			margin-left: 25%;
+		}
+		
+		.form__button:hover {
+			filter:hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		.form__button:active {
+			transform: scale(0.98);
+		}
+		
+		.form__text {
+			text-align: center;
+		}
+		
+		.form__link {
+			color: pink;
+			text-decoration: none;
+			cursor: pointer;
+		}
+		
+		.form__link:hover {
+			text-decoration: underline;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		
+		<form class="form" id="setmetadata"> 
+			<!--    must add to above line:	method="post" action="#"-->
+			<h1 class="form__title">Forecasting Task</h1>
+			<div class="form__message form__message--error"></div>
+			<div class="form__input-group">
+				<input style="font-size:15px;" type="text" class="form__input" autofocus placeholder="Name/keywords">
+				<div class="form__input-error-message"></div>
+			</div>
+			<div class="form__input-group">
+				<input style="font-size:15px;" type="number" class="form__input" autofocus placeholder="Forecasting period">
+				<div class="form__input-error-message"></div>
+			</div>
+			<div class="form__input-group">
+				<input style="font-size:15px; color:white;" type="number" class="form__input" autofocus placeholder="Number of forecasts">
+				<div class="form__input-error-message"></div>
+			</div>
+		    <button style="font-size:20px;" class="form__button" type="submit" onclick="document.location='contributorsetmetadata.html' + window.location.search; return false;">Continue</button>
+		</form>
+	</div>
+	
+	<script>
+		
+		
+		//var dest = window.location.search;
+		
+		
+	</script>
+</body>
+</html>
