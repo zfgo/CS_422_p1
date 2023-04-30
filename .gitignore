@@ -1,10 +1,25 @@
+# exclude files with no identifiers, etc.
+*
+!Makefile
+!/**/
+!*.*
+
+# exclude django sqlite db
+*.sqlite3
+*.DS_Store
+
+# uploaded documents
+documents/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
+# tmp file extensions extensions
 *.so
+*.c
+*.csv
 
 # Distribution / packaging
 .Python
