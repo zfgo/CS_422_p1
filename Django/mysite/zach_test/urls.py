@@ -4,7 +4,7 @@
 from django.urls import path
 
 
-from .import views
+from . import views
 
 
 app_name = "zach_test"
@@ -12,6 +12,7 @@ app_name = "zach_test"
 
 urlpatterns = [
    path("", views.model_form_upload, name="upload"),
+   # path("", views.model_form_upload, name="upload"),
    path("doc_list/", views.document_list, name="download"),
    path("download_file/<int:file_id>/", views.download_file, name='download_file'),
 ]

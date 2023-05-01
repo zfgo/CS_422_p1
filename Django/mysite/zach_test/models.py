@@ -8,38 +8,44 @@ import json
 import pandas as pd
 from .validators import validate_file_extension
 
+class Task(models.Model):
+    task_desc = models.CharField(max_length=255, blank=True)
+    period = models.FloatField()
+    n_forecasts = models.IntegerField()
+
 
 class Document(models.Model):
-   description = models.CharField(max_length=255, blank=True)
-   # document = models.FileField(upload_to='documents/')
-   document = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])
-   document2 = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension], default='SOME STRING')
-   uploaded_at = models.DateTimeField(auto_now_add=True)
-   json_data = models.JSONField(null=True)
-   id = models.BigAutoField(primary_key=True)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE) # files are associated with a TS forecasting task
+    description = models.CharField(max_length=255, blank=True)
+    if_test = models.BooleanField() # True for test data, False for train data
+    document = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])
+    #document2 = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension], default='SOME STRING')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    json_data = models.JSONField(null=True)
+    id = models.BigAutoField(primary_key=True)
 
 
-   def to_json(self):
-       # TODO: figure out the file type
-       # for now, we assume that the file is CSV
+    def to_json(self):
+        # TODO: figure out the file type
+        # for now, we assume that the file is CSV
+
+        print(self.document.path)
+        self.json_data = make_json(self.document.path)
 
 
-       print(self.document.path)
-       self.json_data = make_json(self.document.path)
+    def json_to_csv(self):
+        df = pd.read_json(self.json_data)
+        df = df.transpose()
+
+        # TODO: rename the file so that it's name is the same as the
+        # name it got uploaded as (but with the right file extension)
+        df.to_csv('downloads/tmp.csv', encoding='utf-8', index=False, header=True)
 
 
-   def json_to_csv(self):
-       df = pd.read_json(self.json_data)
-       df = df.transpose()
+    def __str__(self):
+        return self.description
 
 
-       # TODO: rename the file so that it's name is the same as the
-       # name it got uploaded as (but with the right file extension)
-       df.to_csv('downloads/tmp.csv', encoding='utf-8', index=False, header=True)
-
-
-   def __str__(self):
-       return self.description
 # Function to convert a CSV to JSON
 # Takes the file paths as arguments
 # https://www.geeksforgeeks.org/convert-csv-to-json-using-python/
