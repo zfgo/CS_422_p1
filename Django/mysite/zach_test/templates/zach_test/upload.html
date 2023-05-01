@@ -146,21 +146,23 @@
 		onmouseout="this.src='{% static 'images/contributorcontinue.png' %}'" onClick="document.getElementById('form').disabled = true;"></button>
 			
 		</form>
-		
 
-		<!--<form id="form" method="post" enctype="multipart/form-data">
+        {% comment %}
+		<form id="file_form" enctype="multipart/form-data" method="post">
+			 {% csrf_token %}
+			 <label id="document_2">
+                 {{ file_form.as_p }}
+             </label>
+		</form>
+		
+        {% endcomment %}
+
+        <form id="form" method="post" enctype="multipart/form-data">
 		  {% csrf_token %}
 		  
-		  <p>
-			  {{ form.description }}
-		  </p>
-		  <p>
-			  {{ form.document }}
-		  </p>
-		  
-		  {{ form.as_p }}
+		  {{ file_form.as_p }}
 		  <button type="submit">Upload</button>
-		</form>-->
+		</form>
 		
 		
 		

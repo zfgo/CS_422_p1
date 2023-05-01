@@ -5,42 +5,35 @@
 #   available files for downloand
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, FileResponse
-from .models import Document
-from .forms import DocumentForm
-
-
-
-
-
+from .models import Document, Task
+from .forms import DocumentForm, TaskForm
 
 def model_form_upload(request):
    if request.method == 'POST':
-       form = DocumentForm(request.POST, request.FILES)
-       if form.is_valid():
+       form = TaskForm(request.POST)
+       file_form = DocumentForm(request.POST, request.FILES)
+       files_list = request.FILES.getList('document') # this is the field name in the model
+       if form.is_valid() and file_form.is_valid():
            # set commit to false when calling save returns an object
            # of the model that the modelForm is using, and does not
            # save it to the DB
-           doc_model = form.save(commit=False)
-
-
-           # now save the document model to the DB
-           doc_model.save() # this makes the file's path to be accurate
-           doc_model.to_json() # convert the file to json
-           doc_model.save() # save the Document model again
-
-
-           # TODO: this line should be in a different app where the
-           # participant downloads the data
-           doc_model.json_to_csv()
+           task_instance = form.save()
+           for f in files_list:
+               doc_instance = Document(document=f, task=task_instance)
+               doc_instance.save()
+               doc_instance.to_json() # convert the file to json
+               doc_instance.save() # save the Document model again
 
 
            return redirect('doc_list/')
 
 
    else:
-       form = DocumentForm()
+       form = TaskForm()
+       file_form = DocumentForm()
    return render(request, 'zach_test/upload.html', {
-       'form': form
+       'form': form,
+       'file_form': file_form,
    })
 
 
