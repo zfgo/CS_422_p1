@@ -7,7 +7,6 @@ def validate_file_extension(value):
     ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
     valid_extensions = [
         '.csv',
-        '.xls',
         '.xlsx',
         '.json',
     ]
