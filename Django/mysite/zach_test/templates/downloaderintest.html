@@ -1,0 +1,26 @@
+<H2>Files</H2>>
+
+
+<table class="table">
+   <thead>
+       <tr>
+           <th>Title</th>
+           <th>Test_set</th>
+           <th>Training_set</tr>
+       </tr>
+   </thead>
+   <tbody>
+       {% for document in documents %}
+           <tr>
+               <td>{{document.description}}</td>
+               <td>
+                   <a href="{% url 'zach_test:download_file' file_id=document.id %}">Download File</a>
+               </td>
+               <td>
+                   <a href="{% url 'zach_test:download_file' file_id=document.id %}">Download File</a>
+               </td>
+           </tr>
+       {% endfor %}
+   </tbody>
+</table>
+

@@ -1,0 +1,17 @@
+
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <!--
+  <p>
+      {{ form.description }}
+  </p>
+  <p>
+      {{ form.document }}
+  </p>
+  -->
+  {{ form.as_p }}
+  <button type="submit">Upload</button>
+</form>
+
+
