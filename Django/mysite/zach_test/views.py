@@ -12,7 +12,7 @@ def model_form_upload(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         file_form = DocumentForm(request.POST, request.FILES)
-        files_list = request.FILES.getList('document') # this is the field name in the model
+        files_list = request.FILES.getlist('document') # this is the field name in the model
         if form.is_valid() and file_form.is_valid():
             # set commit to false when calling save returns an object
             # of the model that the modelForm is using, and does not
@@ -23,7 +23,6 @@ def model_form_upload(request):
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
-
 
             return redirect('doc_list/')
 
@@ -57,8 +56,4 @@ def download_file(request, file_id):
     with open(file_path, 'rb') as f:
         response = HttpResponse(f.read(), content_type='application/octet-stream')
         response['Content-Disposition'] = 'attachment; filename=' + file.document.name
-    file_path2 = file.document2.path
-    with open(file_path, 'rb') as f:
-        response2 = HttpResponse(f.read(), content_type='application/octet-stream')
-        response2['Content-Disposition'] = 'attachment; filename=' + file.document2.name
     return response

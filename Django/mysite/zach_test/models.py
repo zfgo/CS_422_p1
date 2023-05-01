@@ -15,15 +15,18 @@ class Task(models.Model):
 
 
 class Document(models.Model):
+    #TODO set default value for task so it can migrate
+        #python manage.py makemigrations
+        #python manage.py migrate
+        #these steps required to have the form data upload to db
     task = models.ForeignKey(Task, on_delete=models.CASCADE) # files are associated with a TS forecasting task
-    description = models.CharField(max_length=255, blank=True)
-    if_test = models.BooleanField() # True for test data, False for train data
+    #description = models.CharField(max_length=255, blank=True)
+    if_test = models.BooleanField(default=False) # True for test data, False for train data
     document = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])
     #document2 = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension], default='SOME STRING')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     json_data = models.JSONField(null=True)
     id = models.BigAutoField(primary_key=True)
-
 
     def to_json(self):
         # TODO: figure out the file type
@@ -42,8 +45,8 @@ class Document(models.Model):
         df.to_csv('downloads/tmp.csv', encoding='utf-8', index=False, header=True)
 
 
-    def __str__(self):
-        return self.description
+    #def __str__(self):
+    #   return self.description
 
 
 # Function to convert a CSV to JSON

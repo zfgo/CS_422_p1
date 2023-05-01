@@ -86,7 +86,7 @@
 		}
 		
 		#choose {
-			
+		
 		}
 		
 		#logo {
@@ -109,17 +109,17 @@
 		#document {
 		background: black;
 		z-index: -10;
-		color: #b5beff;
+		color: #6ab2e9;
 		font-size: 11pt;
 		padding: 0.6rem 1rem 1.4rem 1rem;
 		margin-top: 20%;
 		font-family: myFont;
  	 position: relative;
-	border: 4px solid #b5beff;
+	border: 4px solid #6ab2e9;
 	border-radius: 20px;
 			  position: absolute;
 		  top: 20%;
-		  left: 35%; 
+		  left: -5%; 
 		  transform: translate(-50%, -50%);
 		cursor: pointer;
 		}
@@ -133,13 +133,13 @@
 		<h1 class="center responsive">Upload time series set</h1>
 	<div class="file-upload">
 		
-		<form id="form" enctype="multipart/form-data" method="post">
+		<form id="file_form" enctype="multipart/form-data" method="post">
 		<!--    must add to above line:	method="post" action="#"-->
 			 {% csrf_token %}
-			 <label id="document">{{ form.as_p }}</label>
-			<!--<input class="file-upload__input responsive center" type="file" accept=".json,.csv,.xlsx,.xls" name="myFile[]" id="myFile" onchange="showUpload()" multiple>
+			 <label  class="document" id="document" onchange="showUpload()">{{ file_form.as_p }}</label>
+			<input class="file-upload__input responsive center" type="file" accept=".json,.csv,.xlsx,.xls" name="myFile[]" id="myFile" onchange="showUpload()" multiple>
 			<button id="choose" class="file-upload__button responsive center" type="button"><img src="{% static 'images/contributorchoose.png' %}" alt="Choose files" width="300" onmouseover="this.src='{% static 'images/contributorchoosehighlight.png' %}'"
-		onmouseout="this.src='{% static 'images/contributorchoose.png' %}'"></button>-->
+		onmouseout="this.src='{% static 'images/contributorchoose.png' %}'"></button>
 			<span id="chosenfileslabel" class="file-upload__label responsive center">No files chosen<br><span style="color: #337682">&#40; .csv &nbsp;.xlsx&nbsp; .json&#41;</span></span>
 			<span id="scroll" class="responsive center"></span>
 			<button id="upload" class="file-upload__button responsive center" type="submit" value="Submit" ><img src="{% static 'images/contributorcontinue.png' %}" alt="Continue with selected files" width="300" onmouseover="this.src='{% static 'images/contributorcontinuehighlight.png' %}'"
@@ -147,23 +147,14 @@
 			
 		</form>
 
-        {% comment %}
-		<form id="file_form" enctype="multipart/form-data" method="post">
+		<form id="form" enctype="multipart/form-data" method="post">
 			 {% csrf_token %}
 			 <label id="document_2">
-                 {{ file_form.as_p }}
+                 {{ form.as_p }}
              </label>
 		</form>
 		
-        {% endcomment %}
 
-        <form id="form" method="post" enctype="multipart/form-data">
-		  {% csrf_token %}
-		  
-		  {{ file_form.as_p }}
-		  <button type="submit">Upload</button>
-		</form>
-		
 		
 		
 	</div>
@@ -172,7 +163,7 @@
 	
 	<script>
 		Array.prototype.forEach.call(document.querySelectorAll('.file-upload__button'), function(button) {
-			const hiddenInput = button.parentElement.querySelector('.file-upload__input');
+			const hiddenInput = button.parentElement.querySelector('.document');
 			const label = button.parentElement.querySelector('.file-upload__label');
 			
 			button.addEventListener('click', function() {

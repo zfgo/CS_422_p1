@@ -12,7 +12,7 @@ class TaskForm(forms.ModelForm):
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ('description', 'document',) # 'document2')
+        fields = ('document',) # 'document2')
         widgets = {
             'document': forms.ClearableFileInput(attrs={'multiple': True}),
         }
