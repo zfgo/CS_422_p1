@@ -37,7 +37,7 @@ class DocumentForm(forms.ModelForm):
         model = Document
         fields = ('document','document2') # 'document2')
         widgets = {
-            'document': forms.ClearableFileInput(attrs={'multiple': True, 'id':'test', 'class':'hidden'}),
-            'document2': forms.ClearableFileInput(attrs={'multiple': True, 'id':'training', 'class':'hidden'}),
+            'document': forms.ClearableFileInput(attrs={'multiple': True, 'id':'test', 'class':'hidden', 'name':'test[]'}),
+            'document2': forms.ClearableFileInput(attrs={'multiple': True, 'id':'training', 'class':'hidden', 'name':'training[]'}),
         }
         
