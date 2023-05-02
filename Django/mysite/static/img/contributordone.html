@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Numsuite | Participant Page</title>
+<title>Numsuite | Contributor Page</title>
 <link rel="icon" type="image/x-icon" href="favicon.png">
 	<style>
 		
@@ -11,7 +11,7 @@
 			src:url("MundialRegular.otf");
 }
 		body {
-			color: #707fed;
+			color: #6ab2e9;
 			font-family: myFont;
 			background-color: black;
 		}
@@ -77,9 +77,9 @@
 			transition: filter 3s;
 		}
 		
-		#upload {
-			
+		#home {
 			margin-top: 11%;
+			
 			
 		}
 		
@@ -107,6 +107,17 @@
 			filter: hue-rotate(360deg);
 		  }
 		}
+
+		
+		#icon {
+			margin-top: -12%;
+			width: 15%;
+			max-height: 900%;
+			 animation-duration: 3s;
+			  animation-name: shift;
+			  animation-iteration-count: infinite;
+			  animation-direction: alternate;
+		}
 		
 		
 		
@@ -118,12 +129,13 @@
 	<div class="parent">
 		
 	<div class="file-upload">
-			<h1 class="center responsive">Download or upload time series data</h1>
-				<a href="participantdownload.html"><button id="download" class="file-upload__button responsive center" type="button"><img src="participantdownload.png" alt="Return to download" width="300" onmouseover="this.src='participantdownloadhighlight.png'"
-		onmouseout="this.src='participantdownload.png'"></button></a>
-			<a href="participantupload.html"><button id="upload" class="file-upload__button responsive center" type="button"><img src="participantupload2.png" alt="Upload another set" width="300" onmouseover="this.src='participantupload2highlight.png'"
-		onmouseout="this.src='participantupload2.png'"></button></a>
+			<img id="icon" src="ccheck.png" class="file-upload__button responsive center" alt="done">
 
+			<h1 class="center responsive">Set successfully uploaded.</h1>
+			<a href="contributor.html"><button id="more" class="file-upload__button responsive center" type="button"><img src="contributormore.png" alt="Upload another set" width="300" onmouseover="this.src='contributormorehighlight.png'"
+		onmouseout="this.src='contributormore.png'"></button></a>
+			<a href="userchoose.html"><button id="home" class="file-upload__button responsive center" type="button"><img src="contributorhome.png" alt="Return to home" width="300" onmouseover="this.src='contributorhomehighlight.png'"
+		onmouseout="this.src='contributorhome.png'"></button></a>
 		
 		
 		
