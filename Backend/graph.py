@@ -4,10 +4,10 @@
 # AUTHORS : Kareem Taha
 import matplotlib.pyplot as plt
 
-def graph_model(x, y_pred, y_act, units='s'):
+def graph_model(x, pred, true, units='s'):
     fig, ax = plt.subplots(figsize=(5,4))
-    fig.plot(x,y_act,c='r')
-    fig.plot(x,y_pred,c='b')
+    fig.plot(x,true,c='r')
+    fig.plot(x,pred,c='b')
     ax.set_xlabel(f'Time {units}')
     ax.set_ylabel(f'Values')
     ax.set_title('Time Series Actual vs. Predicted')

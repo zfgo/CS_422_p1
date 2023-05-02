@@ -12,7 +12,7 @@
 documents/
 
 # backend test-data
-Backend/test_data
+Backend/test
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
