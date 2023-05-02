@@ -277,12 +277,9 @@
 	<div class="parent">
 		<h1 class="center responsive">Upload time series set</h1>
 	<div class="file-upload">
-		
-		<form id="file_form" enctype="multipart/form-data" method="post">
-		<!--    must add to above line:	method="post" action="#"-->
-			 {% csrf_token %}
-			 <label  class="document" id="document" onchange="showUpload()">
-			{% for item in file_form %}
+		<form id="form" enctype="multipart/form-data" method="post">
+			{% csrf_token %}
+			{% for item in form %}
             <div class="fieldWrapper">
                 {{ item.label }} {{ item }}
                 {% if item.help_text %}
@@ -291,6 +288,25 @@
             </div>
 			<br>
         	{% endfor %}
+			<form id="file_form" enctype="multipart/form-data" method="post">
+				<!--    must add to above line:	method="post" action="#"-->
+					 {% csrf_token %}
+					 <label  class="document" id="document" onchange="showUpload()">
+					{% for item in file_form %}
+					<div class="fieldWrapper">
+						{{ item.label }} {{ item }}
+						{% if item.help_text %}
+							{{ item.help_text|safe }}
+						{% endif %}
+					</div>
+					<br>
+					{% endfor %}
+				</form>
+				<button type="submit" class="btn btn-primary">this tuest</button>
+			   
+	   </form>
+
+			<!--
 			<button type="submit" class="btn btn-primary"></button>
 			</label>
 			<input class="file-upload__input responsive center" type="file" accept=".json,.csv,.xlsx,.xls" name="myFile[]" id="myFile" onchange="showUpload()" multiple>
@@ -302,15 +318,9 @@
 		onmouseout="this.src='{% static 'images/contributorcontinue.png' %}'" onClick="document.getElementById('form').disabled = true;"></button>
 			
 		</form>
-
+	-->
 		
-		<form id="form" enctype="multipart/form-data" method="post">
-			 {% csrf_token %}
-			 <div class="form__input-group">
-                 {{ form.as_p }}
-				
-             </div>
-		</form>
+
 		
 
 		

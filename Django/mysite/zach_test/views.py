@@ -8,13 +8,14 @@ from django.http import HttpResponse, FileResponse
 from .models import Document, Task
 from .forms import DocumentForm, TaskForm
 
-
 def model_form_upload(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
+      
         file_form = DocumentForm(request.POST, request.FILES)
         files_list = request.FILES.getlist('document') # this is the field name in the model
-        if form.is_valid() and file_form.is_valid():
+        print(file_form.is_valid())
+        if form.is_valid() and file_form.is_valid(): #form.is_valid(): and file_form.is_valid()
             # set commit to false when calling save returns an object
             # of the model that the modelForm is using, and does not
             # save it to the DB
@@ -25,7 +26,7 @@ def model_form_upload(request):
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
 
-            return redirect('doc_list/')
+                return redirect('doc_list/')
     else:
         form = TaskForm()
         file_form = DocumentForm()

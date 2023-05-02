@@ -9,10 +9,9 @@ import pandas as pd
 from .validators import validate_file_extension
 
 class Task(models.Model):
-    task_desc = models.CharField(max_length=255, blank=True)
+    task_desc = models.CharField(max_length=255, blank=True, null=True)
     period = models.FloatField(null=True)
     n_forecasts = models.IntegerField(null=True)
-
 
 class Document(models.Model):
     #TODO set default value for task so it can migrate
@@ -21,9 +20,9 @@ class Document(models.Model):
         #these steps required to have the form data upload to db
     task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True) # files are associated with a TS forecasting task
     #description = models.CharField(max_length=255, blank=True)
-    if_test = models.BooleanField(default=False) # True for test data, False for train data
-    document = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])
-    document2 = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])
+    if_test = models.BooleanField(default=True, null=True) # True for test data, False for train data
+    document = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension], null=True)
+    document2 = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension], null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     json_data = models.JSONField(null=True)
     id = models.BigAutoField(primary_key=True)

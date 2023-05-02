@@ -11,10 +11,10 @@ class TaskForm(forms.ModelForm):
     #       field.label = ""                    #they are currently disabled for easier debugging!!!!!
     class Meta:
         model = Task 
-        fields = ['task_desc','task_desc', 'period', 'n_forecasts'] # ('task_desc', 'period', 'n_forecasts', )
+        fields = ['task_desc','period', 'n_forecasts',] # ('task_desc', 'period', 'n_forecasts', )
         widgets = {
             'task_desc': forms.TextInput(attrs={'class':'form__input',
-				   'id':'desc', 'placeholder':'Task description', 'autofocus':True}),
+				   'id':'form', 'placeholder':'Task description', 'autofocus':True}),
         }
         
         #TODO fields: [name/keywords,  forecasting period,  num of forecasts]
