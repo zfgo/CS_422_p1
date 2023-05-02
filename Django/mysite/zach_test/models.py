@@ -23,7 +23,7 @@ class Document(models.Model):
     #description = models.CharField(max_length=255, blank=True)
     if_test = models.BooleanField(default=False) # True for test data, False for train data
     document = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])
-    #document2 = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension], default='SOME STRING')
+    document2 = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])
     uploaded_at = models.DateTimeField(auto_now_add=True)
     json_data = models.JSONField(null=True)
     id = models.BigAutoField(primary_key=True)

@@ -16,10 +16,7 @@ class TaskForm(forms.ModelForm):
             'task_desc': forms.TextInput(attrs={'class':'form__input',
 				   'id':'desc', 'placeholder':'Task description', 'autofocus':True}),
         }
-        widgets = {
-            'task_desc': forms.TextInput(attrs={'class':'form__input',
-				   'id':'desc', 'placeholder':'Task description', 'autofocus':True}),
-        }
+        
         #TODO fields: [name/keywords,  forecasting period,  num of forecasts]
 
 class DocumentForm(forms.ModelForm):
@@ -29,7 +26,9 @@ class DocumentForm(forms.ModelForm):
     #       field.label = ""                    #they are currently disabled for easier debugging!!!!!
     class Meta:
         model = Document
-        fields = ('document',) # 'document2')
+        fields = ('document','document2') # 'document2')
         widgets = {
             'document': forms.ClearableFileInput(attrs={'multiple': True}),
+            'document2': forms.ClearableFileInput(attrs={'multiple': True}),
         }
+        
