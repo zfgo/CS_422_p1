@@ -11,9 +11,9 @@ from .forms import DocumentForm, TaskForm
 def model_form_upload(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
-      
         file_form = DocumentForm(request.POST, request.FILES)
         files_list = request.FILES.getlist('document') # this is the field name in the model
+        files_list2 = request.FILES.getlist('document2')
         print(file_form.is_valid())
         if form.is_valid() and file_form.is_valid(): #form.is_valid(): and file_form.is_valid()
             # set commit to false when calling save returns an object
@@ -25,8 +25,15 @@ def model_form_upload(request):
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
+            for f in files_list2:
+                doc_instance = Document(document=f, task=task_instance)
+                doc_instance.save()
+                doc_instance.to_json() # convert the file to json
+                doc_instance.save() # save the Document model again
 
-                return redirect('doc_list/')
+
+
+            return redirect('doc_list/')
     else:
         form = TaskForm()
         file_form = DocumentForm()

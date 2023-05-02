@@ -12,6 +12,7 @@ class Task(models.Model):
     task_desc = models.CharField(max_length=255, blank=True, null=True)
     period = models.FloatField(null=True)
     n_forecasts = models.IntegerField(null=True)
+    id = models.BigAutoField(primary_key=True)
 
 class Document(models.Model):
     #TODO set default value for task so it can migrate

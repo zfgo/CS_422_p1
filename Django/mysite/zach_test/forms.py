@@ -15,12 +15,13 @@ class TaskForm(forms.ModelForm):
         widgets = {
             'task_desc': forms.TextInput(attrs={'class':'form__input',
 				   'id':'form', 'placeholder':'Task description', 'autofocus':True}),
-            'period': forms.TextInput(attrs={'class':'form__input',
+        }
+        """
+         'period': forms.TextInput(attrs={'class':'form__input',
 				   'id':'form', 'placeholder':'Period', 'autofocus':True}),
             'n_forecasts': forms.TextInput(attrs={'class':'form__input',
 				   'id':'form', 'placeholder':'n_forecasts', 'autofocus':True}),
-        }
-        
+        """
         #TODO fields: [name/keywords,  forecasting period,  num of forecasts]
 
 class DocumentForm(forms.ModelForm):
