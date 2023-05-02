@@ -10,8 +10,8 @@ from .validators import validate_file_extension
 
 class Task(models.Model):
     task_desc = models.CharField(max_length=255, blank=True)
-    period = models.FloatField()
-    n_forecasts = models.IntegerField()
+    period = models.FloatField(null=True)
+    n_forecasts = models.IntegerField(null=True)
 
 
 class Document(models.Model):
@@ -19,7 +19,7 @@ class Document(models.Model):
         #python manage.py makemigrations
         #python manage.py migrate
         #these steps required to have the form data upload to db
-    task = models.ForeignKey(Task, on_delete=models.CASCADE) # files are associated with a TS forecasting task
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True) # files are associated with a TS forecasting task
     #description = models.CharField(max_length=255, blank=True)
     if_test = models.BooleanField(default=False) # True for test data, False for train data
     document = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension])

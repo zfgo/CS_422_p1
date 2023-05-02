@@ -8,6 +8,7 @@ from django.http import HttpResponse, FileResponse
 from .models import Document, Task
 from .forms import DocumentForm, TaskForm
 
+
 def model_form_upload(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -25,8 +26,6 @@ def model_form_upload(request):
                 doc_instance.save() # save the Document model again
 
             return redirect('doc_list/')
-
-
     else:
         form = TaskForm()
         file_form = DocumentForm()
