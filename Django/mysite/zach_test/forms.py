@@ -41,3 +41,19 @@ class DocumentForm(forms.ModelForm):
             'document2': forms.ClearableFileInput(attrs={'multiple': True, 'id':'training', 'class':'hidden', 'name':'training[]'}),
         }
         
+class MetaDataForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+       super().__init__(*args, **kwargs)
+       for key, field in self.fields.items():   # FLEEBER WANTS THESE 4 LINES TO STAY!
+           field.label = ""                    #they are currently disabled for easier debugging!!!!!
+    class Meta:
+        model = Document
+        fields = ['task_desc','period', 'n_forecasts',] # ('task_desc', 'period', 'n_forecasts', )
+        widgets = {
+            'task_desc': forms.TextInput(attrs={'class':'form__input',
+				   'id':'t1', 'placeholder':'Task description', 'autofocus':True}),
+            'period': forms.TextInput(attrs={'class':'form__input',
+				   'id':'t2', 'placeholder':'Period', 'type':"number"}),
+            'n_forecasts': forms.TextInput(attrs={'class':'form__input',
+				   'id':'t3', 'placeholder':'Number of forecasts', 'type':"number"}),
+        }
