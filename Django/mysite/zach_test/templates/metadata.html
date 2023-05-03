@@ -2,12 +2,9 @@
     <form method="post" enctype="multipart/form-data", id="file_form">
        {% for document in documents %}
                 {% if document.task == task_obj %}  
-                    {% csrf_token %}
-                    {% for item in file_form %}
-                    
+                    {% csrf_token %}    
                     {{file_form.as_p}}
-                    
-                    {% endfor %}
+                    HELL!
                {% endif %} 
        {% endfor %}
     </form>
