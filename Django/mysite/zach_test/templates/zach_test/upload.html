@@ -250,6 +250,7 @@
 		}
 		.form__input-group {
 			margin-bottom: 1rem;
+			
 		}
 		
 		.form__input {
@@ -268,6 +269,10 @@
 			
 		}
 		
+		#file_form {
+			margin-top: 50%;
+		}
+		
 		
 		
 		
@@ -280,10 +285,10 @@
 	<div class="parent">
 		<h1 class="center responsive">Upload time series set</h1>
 	<div class="file-upload">
-		<form id="form" enctype="multipart/form-data" method="post">
+		<form class="center responsive" id="form" enctype="multipart/form-data" method="post">
 			{% csrf_token %}
 			{% for item in form %}
-            <div class="fieldWrapper">
+            <div class="form__input-group">
                 {{ item.label }} {{ item }}
                 {% if item.help_text %}
                     {{ item.help_text|safe }}
@@ -291,12 +296,12 @@
             </div>
 			<br>
         	{% endfor %}
-			<form id="file_form" enctype="multipart/form-data" method="post">
+			<form class="center responsive" id="file_form" enctype="multipart/form-data" method="post">
 				<!--    must add to above line:	method="post" action="#"-->
 					 {% csrf_token %}
-					 <label  class="document" id="document" onchange="showUpload()">
+					 <label id="document" onchange="showUpload()">
 					{% for item in file_form %}
-					<div class="fieldWrapper">
+					<div class="form__input-group">
 						{{ item.label }} {{ item }}
 						{% if item.help_text %}
 							{{ item.help_text|safe }}
