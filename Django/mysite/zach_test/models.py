@@ -27,6 +27,11 @@ class Document(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     json_data = models.JSONField(null=True)
     id = models.BigAutoField(primary_key=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    set_description = models.CharField(max_length=255, blank=True, null=True)
+    vector_size = models.IntegerField(null=True)
+
+
 
     def to_json(self):
         # TODO: figure out the file type
