@@ -15,6 +15,10 @@ class TaskForm(forms.ModelForm):
         widgets = {
             'task_desc': forms.TextInput(attrs={'class':'form__input',
 				   'id':'t1', 'placeholder':'Task description', 'autofocus':True}),
+                     'period': forms.TextInput(attrs={'class':'form__input',
+				   'id':'t2', 'placeholder':'Period', 'type':'number'}),
+            'n_forecasts': forms.TextInput(attrs={'class':'form__input',
+				   'id':'t3', 'placeholder':'Number of forecasts', 'type':'number'}),
         }
         """
          'period': forms.TextInput(attrs={'class':'form__input',
@@ -49,5 +53,4 @@ class MetaDataForm(forms.ModelForm):
             'vector_size': forms.TextInput(attrs={'class':'form__input',
 				   'id':'t3', 'placeholder':'Number of forecasts', 'type':"number"}),
         }
-
 
