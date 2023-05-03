@@ -54,9 +54,6 @@ def document_list(request):
     documents = Document.objects.all()
     return render(request, 'download.html', {'documents' : documents})
 
-
-
-
 def download_file(request, file_id):
     file = get_object_or_404(Document, pk=file_id)
 
@@ -73,6 +70,9 @@ def document_metadata(request):
     """documents = Document.objects.get(task=task_obj)"""
     documents = Document.objects.all()
     form = MetaDataForm(request.POST)
-
+    if form.is_valid():
+        form.save()
     return render(request, 'metadata.html',  {'documents': documents, 'task_obj': task_obj, "file_form": form, })
+
+
 

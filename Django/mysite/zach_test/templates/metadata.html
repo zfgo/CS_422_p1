@@ -1,11 +1,13 @@
 <H2>Files</H2>>
     <form method="post" enctype="multipart/form-data", id="file_form">
+        {% csrf_token %}  
        {% for document in documents %}
                 {% if document.task == task_obj %}  
                     {% csrf_token %}    
                     {{file_form.as_p}}
                     HELL!
+                    <button type="submit" class="btn btn-primary">this tuest</button>
                {% endif %} 
        {% endfor %}
+       <button type="submit" class="btn btn-primary">this tuest</button>
     </form>
-
