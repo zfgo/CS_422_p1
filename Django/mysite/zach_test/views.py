@@ -6,7 +6,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, FileResponse
 from .models import Document, Task
-from .forms import DocumentForm, TaskForm
+from .forms import DocumentForm, TaskForm, MetaDataForm
 
 def model_form_upload(request):
     if request.method == 'POST':
@@ -33,7 +33,7 @@ def model_form_upload(request):
 
 
 
-            return redirect('doc_list/')
+            return redirect('metadata/')
     else:
         form = TaskForm()
         file_form = DocumentForm()
@@ -64,3 +64,11 @@ def download_file(request, file_id):
         response = HttpResponse(f.read(), content_type='application/octet-stream')
         response['Content-Disposition'] = 'attachment; filename=' + file.document.name
     return response
+
+def document_metadata(request):
+    task_obj = Task.objects.all()[len(Task.objects.all())-1]
+    """documents = Document.objects.get(task=task_obj)"""
+    documents = Document.objects.all()
+    form = MetaDataForm(request.POST)
+    return render(request, 'metadata.html',  {'documents': documents, 'task_obj': task_obj})
+
