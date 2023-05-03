@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, FileResponse
 from .models import Document, Task
 from .forms import DocumentForm, TaskForm, MetaDataForm
+import zipfile, os
 
 def model_form_upload(request):
     if request.method == 'POST':
@@ -34,8 +35,6 @@ def model_form_upload(request):
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
 
-
-
             return redirect('metadata/')
     else:
         form = TaskForm()
@@ -48,23 +47,43 @@ def model_form_upload(request):
 def get_file_metadata(request, file_id):
     return HttpResponse("test (at file %s)." % file_id)
 
-
-
 def document_list(request):
-    documents = Document.objects.all()
-    return render(request, 'download.html', {'documents' : documents})
+    task = Task.objects.all()
+    return render(request, 'download.html', {'documents' : task})
+
+
+def zip_folder(folder_path, zip_path):
+    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for root, _, files in os.walk(folder_path):
+            for file in files:
+                file_path = os.path.join(root, file)
+                arcname = os.path.relpath(file_path, folder_path)
+                zipf.write(file_path, arcname)
 
 def download_file(request, file_id):
-    file = get_object_or_404(Document, pk=file_id)
-
-
+    file = get_object_or_404(Task, pk=file_id)
     # Assuming the file field is named 'file_field' in your model
-    file_path = file.document.path
-    with open(file_path, 'rb') as f:
+
+    file_path = f"documents/{file.id}"
+    zip_path = f"{file_path}.zip"
+    zip_folder(folder_path=file_path, zip_path=zip_path)
+    
+    with open(zip_path, 'rb') as f:
         response = HttpResponse(f.read(), content_type='application/octet-stream')
-        response['Content-Disposition'] = 'attachment; filename=' + file.document.name
+        response['Content-Disposition'] = f'attachment; filename="{file.id}.zip"'
+    
+    # Clean up the temporary zip file
+    os.remove(zip_path)
+    
     return response
 
+    """
+    zip_folder(folder_path=file_path, zip_path=f"{file_path}")
+    with open(file_path, 'rb') as f:
+        response = HttpResponse(f.read(), content_type='application/octet-stream')
+        #response['Content-Disposition'] = 'attachment; filename=' + file.document.name
+    return response
+    """
 def document_metadata(request):
     task_obj = Task.objects.all()[len(Task.objects.all())-1]
     """documents = Document.objects.get(task=task_obj)"""

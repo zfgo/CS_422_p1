@@ -1,16 +1,18 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Numsuite | Participant Page</title>
-<link rel="icon" type="image/x-icon" href="favicon.png">
-<style>
-	@font-face {
+<link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+	<style>
+		
+				@font-face {
 			font-family: myFont;
-			src:url("MundialRegular.otf");
+			src:url("{% static 'fonts/MundialRegular.otf' %}");
 		}
 		body {
+			font-family: myFont;
 			background-color: black;
 			color: #b5beff;
 		}
@@ -210,6 +212,45 @@
 		  transform: translate(-50%, -50%);
 		cursor: pointer;
 	}
+		
+		
+	
+	td {
+		padding: 10% -50%;
+	}
+	
+	a {
+		
+		border: 3px solid #b5beff;
+		border-radius: 24px;
+		
+		padding: 1rem;
+
+	}
+		
+		h2 {
+			color: #7875d2;
+		}
+		
+		.but {
+			display: block;
+			color: #b5beff;
+			width: 100%;
+			padding: 0.75rem;
+			box-sizing: border-box;
+			border-radius: 50px;
+			border: 3px solid #b5beff;
+			outline: none;
+			background:#0c1743;
+			transition: background 0.2s, border-color 0.2s;
+			text-decoration: none;
+		}
+		
+			.but:hover {
+
+			filter: hue-rotate(360deg);
+			transition: filter 3s;
+		}
 </style>
 </head>     
 
@@ -217,43 +258,32 @@
 
 <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
 
-    	<div class="parent">
-	<div class="file-upload">
-        
-			<button id="chooseDL" class="file-upload__button responsive center" type="button"><img src="participantdownload2.png" alt="Choose files to download" width="300" onmouseover="this.src='participantdownload2highlight.png'"
-			onmouseout="this.src='participantdownload2.png'"></button>
-			<!--<span id="chosenfileslabelDL" class="file-upload__label responsive center">No files chosen<br><span style="color: #625694">&#40; .csv &nbsp;.xls&#40;x&#41;&nbsp; .json&#41;</span></span>
-			<span id="scrollDL" class="responsive center"></span>-->
 
-	
-	<div class="custom-select" style="width:200px;">
-  <select>
-    <option value="0">Select file:</option>
-    <option value="1">bees</option>
-    <option value="2">cows</option>
-    <option value="3">vanilla</option>
-    <option value="4">dog</option>
-    <option value="5">Honda</option>
-    <option value="6">thing</option>
-    <option value="7">Land Rover</option>
-    <option value="8">Mercedes</option>
-    <option value="9">Mini</option>
-    <option value="10">Nissan</option>
-    <option value="11">Toyota</option>
-    <option value="12">Volvo</option>
-  </select>
-</div>
-		
-		<div style="width:200px;">
-			<a href="participant.html"><button id="participant" class="responsive center" type="button">Back</button></a>
-		</div>
-			
-			
-				</div>
-	  
-  </div>
-  
-	<img id="logo" class="responsive" src="numsuite.png" width="10%" alt="logo">
+<h2>Available Files</h2>
+
+
+<table class="table">
+   <thead>
+       <tr>
+           <th>Title</th>
+           <th>Test set</th>
+           <th>Training set</th>
+       </tr>
+   </thead>
+   <tbody>
+       {% for document in documents %}
+           <tr>
+               <td>{{document.description}}</td>
+               <td>
+                   <a class="but" href="{% url 'zach_test:download_file' file_id=document.id %}"></a> 
+               </td>
+               <td>
+                   <br><a class="but" href="{% url 'zach_test:download_file' file_id=document.id %}">Download File<br></a><br><br>
+               </td>
+           </tr>
+       {% endfor %}
+   </tbody>
+</table>
 
 <script>
 
@@ -341,31 +371,3 @@ document.addEventListener("click", closeAllSelect);
 </body>
 </html>
 
-<!--
-<H2>Files</H2>>
-
-
-<table class="table">
-   <thead>
-       <tr>
-           <th>Title</th>
-           <th>Test_set</th>
-           <th>Training_set</tr>
-       </tr>
-   </thead>
-   <tbody>
-       {% for document in documents %}
-           <tr>
-               <td>{{document.description}}</td>
-               <td>
-                   <a href="{% url 'zach_test:download_file' file_id=document.id %}"></a>
-               </td>
-               <td>
-                   <a href="{% url 'zach_test:download_file' file_id=document.id %}">Download File</a>
-               </td>
-           </tr>
-       {% endfor %}
-   </tbody>
-</table>
-
--->

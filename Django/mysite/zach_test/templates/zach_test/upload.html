@@ -335,6 +335,11 @@
 		#subbox {
 			margin-top: -550%;
 		}
+		
+		#desc {
+			font-size: 10pt;
+			margin-top: 30%;
+		}
 
 		
 	</style>
@@ -344,6 +349,7 @@
 	<div class="parent">
 		<h1 class="center responsive form__title" id="tasktitle">Forecasting Task</h1>
 		<h1 class="center responsive form__title" id="filetitle">Upload time series sets</h1>
+		<h1 id="desc" class="center responsive form__title">Accepted file formats: .csv, .xlsx, .json<br>For each file, there must be one column containing the<br> time and one other column containing a dependent variable.</h1>
 	<div class="file-upload">
 		<form class="center responsive" id="form" enctype="multipart/form-data" method="post">
 			{% csrf_token %}
@@ -374,12 +380,14 @@
 				<button id="submit" type="submit" class="hidden">this tuest</button>
 				<div id="subbox">
 				<label class="form__input fileformcontainer" id="submitbutton" for="submit">Submit</label>
+					
 					</div>
 	   </form>
 			<div class="center responsive fileformcontainercontainer">
 			
 			<label class="form__input fileformcontainer" id="testbutton" for="test">Select test set</label>
 			<label class="form__input fileformcontainer" id="trainingbutton" for="training">Select training set</label>
+				
 			
 			</div>
 
@@ -518,8 +526,6 @@
 			};
 		document.getElementById("form").addEventListener("submit", redir, true);*/
 	
-		
-		
 	</script>
 </body>
 </html>

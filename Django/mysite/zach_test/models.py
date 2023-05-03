@@ -14,6 +14,9 @@ class Task(models.Model):
     n_forecasts = models.IntegerField(null=True)
     id = models.BigAutoField(primary_key=True)
 
+def document_upload_path(instance, filename):
+    return f"documents/{instance.task.id}/{filename}"
+
 class Document(models.Model):
     #TODO set default value for task so it can migrate
         #python manage.py makemigrations
@@ -22,16 +25,14 @@ class Document(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True) # files are associated with a TS forecasting task
     #description = models.CharField(max_length=255, blank=True)
     if_test = models.BooleanField(default=True, null=True) # True for test data, False for train data
-    document = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension], null=True)
-    document2 = models.FileField(upload_to="documents/%Y/%m/%d", validators=[validate_file_extension], null=True)
+    document = models.FileField(upload_to=document_upload_path, validators=[validate_file_extension], null=True)
+    document2 = models.FileField(upload_to=document_upload_path, validators=[validate_file_extension], null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     json_data = models.JSONField(null=True)
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     set_description = models.CharField(max_length=255, blank=True, null=True)
     vector_size = models.IntegerField(null=True)
-
-
 
     def to_json(self):
         # TODO: figure out the file type
