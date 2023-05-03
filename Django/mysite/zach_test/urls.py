@@ -11,9 +11,12 @@ app_name = "zach_test"
 
 
 urlpatterns = [
-   path("", views.model_form_upload, name="upload"),
-   path("metadata/", views.document_metadata, name="metadata"),
-   path("doc_list/", views.document_list, name="download"),
+   path("", views.home, name="upload"),
+   path("upload/", views.model_form_upload, name="upload"),
+   path("upload/metadata/", views.document_metadata, name="metadata"),
+   path("download/", views.document_list, name="download"),
    path("download_file/<int:file_id>/", views.download_file, name='download_file'),
 ]
+
+
 

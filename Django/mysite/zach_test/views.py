@@ -49,6 +49,7 @@ def get_file_metadata(request, file_id):
 
 def document_list(request):
     task = Task.objects.all()
+
     return render(request, 'download.html', {'documents' : task})
 
 
@@ -84,14 +85,24 @@ def download_file(request, file_id):
         #response['Content-Disposition'] = 'attachment; filename=' + file.document.name
     return response
     """
+
 def document_metadata(request):
-    task_obj = Task.objects.all()[len(Task.objects.all())-1]
-    """documents = Document.objects.get(task=task_obj)"""
-    documents = Document.objects.all()
-    form = MetaDataForm(request.POST)
-    if form.is_valid():
-        form.save()
-    return render(request, 'metadata.html',  {'documents': documents, 'task_obj': task_obj, "file_form": form, })
+    if request.method == 'POST':
 
+        task_obj = Task.objects.all()[len(Task.objects.all())-1]
+        """documents = Document.objects.get(task=task_obj)"""
+        documents = Document.objects.all()
+        form = MetaDataForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("/home/")
 
+    else:
+        documents = Document.objects.all()
+        task_obj = Task.objects.all()[len(Task.objects.all())-1]
+        form = MetaDataForm(request.POST)
+        return render(request, 'metadata.html',  {'documents': documents, 'task_obj': task_obj, "file_form": form, })
+
+def home(request):
+    return render(request, 'home.html')
 

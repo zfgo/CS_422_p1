@@ -261,22 +261,17 @@
 
 <h2>Available Files</h2>
 
-
 <table class="table">
    <thead>
        <tr>
-           <th>Title</th>
-           <th>Test set</th>
-           <th>Training set</th>
+           <th>Description</th>
+           <th>Task</th>
        </tr>
    </thead>
    <tbody>
        {% for document in documents %}
            <tr>
-               <td>{{document.description}}</td>
-               <td>
-                   <a class="but" href="{% url 'zach_test:download_file' file_id=document.id %}"></a> 
-               </td>
+               <td>{{document.task_desc}} </td>
                <td>
                    <br><a class="but" href="{% url 'zach_test:download_file' file_id=document.id %}">Download File<br></a><br><br>
                </td>
