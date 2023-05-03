@@ -1,20 +1,14 @@
 <H2>Files</H2>>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data", id="file_form">
        {% for document in documents %}
-            
-                {% if document.task == task_obj %}    
-                <form method="post" enctype="multipart/form-data">
+                {% if document.task == task_obj %}  
                     {% csrf_token %}
-                    {{form.as_p}}
-
-                </form>
-                <a href="{% url 'zach_test:download_file' file_id=document.id %}">Download File</a>
-    
-                {% endif %}
-            
+                    {% for item in file_form %}
+                    
+                    {{file_form.as_p}}
+                    
+                    {% endfor %}
+               {% endif %} 
        {% endfor %}
     </form>
-
-
-    
 

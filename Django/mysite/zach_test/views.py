@@ -22,11 +22,14 @@ def model_form_upload(request):
             task_instance = form.save()
             for f in files_list:
                 doc_instance = Document(document=f, task=task_instance)
+                doc_instance.if_test = True
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
+                
             for f in files_list2:
                 doc_instance = Document(document=f, task=task_instance)
+                doc_instance.if_test = False
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
@@ -70,5 +73,6 @@ def document_metadata(request):
     """documents = Document.objects.get(task=task_obj)"""
     documents = Document.objects.all()
     form = MetaDataForm(request.POST)
-    return render(request, 'metadata.html',  {'documents': documents, 'task_obj': task_obj})
+
+    return render(request, 'metadata.html',  {'documents': documents, 'task_obj': task_obj, "file_form": form, })
 
