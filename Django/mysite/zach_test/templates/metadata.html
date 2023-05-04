@@ -12,6 +12,8 @@
 			src:url("{% static 'fonts/MundialRegular.otf' %}");
 }
 		body {
+
+			text-align: center;
 			color: #6ab2e9;
 			font-family: myFont;
 			background-color: black;
@@ -64,7 +66,7 @@
 		.center{
 		  position: absolute;
 		  top: 50%;
-		  left: 35%; 
+		  left: 50%; 
 		  transform: translate(-50%, -50%);
 		}
 
@@ -90,9 +92,10 @@
 		}
 		
 		#logo {
-			position: fixed;
-			margin-top: 23.7%;
+			position:sticky;
+			margin-top: 33.7%;
 			margin-left: 2%;
+			
 		}
 		
 		#chosenfileslabel {
@@ -258,7 +261,7 @@
 		.form__input {
 			display: block;
 			color: #8BE0FF;
-			width: 100%;
+			min-width: 250px;
 			padding: 0.75rem;
 			box-sizing: border-box;
 			border-radius: 54px;
@@ -267,7 +270,7 @@
 			background:#002B3B;
 			transition: background 0.2s, border-color 0.2s;
 			font-family: myFont;
-			margin-top: 2%;
+			margin-top: 5%;
 			
 		}
 		
@@ -320,7 +323,7 @@
 			background: black;
 			width: fit-content;
 			font-size: 15pt;
-			padding: 1% 1%;
+			padding: 4% 4%;
 		}
 		
 		#test{
@@ -337,33 +340,54 @@
 			margin-top: -550%;
 		}
 		
+		p, ul {
+			color: black;
+			font-size: 0px;
+		}
+		
+		h1 {
+			margin-top: 30%;
+		}
+		
+		h3 {
+			margin-bottom: 0%;
+		}
 
 	</style>
 </head>
 </html>
 <body>
 	<br><br>
-	<div class="container responsive center">
-    <h2>File Metadata</h2>
+	<div class="responsive center">
+    <h1>File Metadata</h1>
     <form method="post" enctype="multipart/form-data" id="file_form">
         {% csrf_token %}
        {% for document in documents %}
                 {% if document.task == task_obj %}
                     {% csrf_token %}
-		<h1>hi</h1>
-		{{document.name.as_p}}
+		<br><h3>some file</h3> <!--SHOULD BE NAME OF THE CURRENT FILE-->
                     {{file_form.as_p}}
                     
                {% endif %} 
        {% endfor %}
+		
+		
+					{% for item in form %}
+            <div class="form__input-group">
+                {{ item.label }} {{ item }}
+                {% if item.help_text %}
+                    {{ item.help_text|safe }}
+                {% endif %}
+            </div>
+			
+        	{% endfor %}
 	   
        <button id="submit" type="submit" class="hidden"> Submit </button>
 		<br><br>
-		<label id="submitbutton" for="submit" class="form__button">Submit</label>
+		<label id="submitbutton" for="submit" class="form__button">Submit</label><br><br><br><br><br><br>
     </form>
 	</div>
 	
-	<img id="logo" class="responsive" src="{% static 'images/numsuite.png' %}" width="10%" alt="logo">
 	
 	<script>
 	</script>

@@ -41,6 +41,7 @@ class DocumentForm(forms.ModelForm):
             'document2': forms.ClearableFileInput(attrs={'multiple': True, 'id':'training', 'name':'training[]'}),
         }
 
+
 class MetaDataForm(forms.ModelForm):
     class Meta:
         model = Document
@@ -51,7 +52,7 @@ class MetaDataForm(forms.ModelForm):
             'fdescription': forms.TextInput(attrs={'class':'form__input',
 				   'id':'desc', 'placeholder':'Time series description/keywords'}),
             'funits': forms.TextInput(attrs={'class':'form__input',
-				   'id':'units', 'placeholder':'Units', 'type':"number"}),
+				   'id':'units', 'placeholder':'Units'}),
             'fvector_size': forms.TextInput(attrs={'class':'form__input',
 				   'id':'size', 'placeholder':'Vector size', 'type':"number"}),
             'flength': forms.TextInput(attrs={'class':'form__input',

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Numsuite | Contributor Page</title>
+<title>Numsuite | Participant Page</title>
 <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
 	<style>
 		
@@ -12,6 +12,11 @@
 			font-family: myFont;
 			src:url("{% static 'fonts/MundialRegular.otf' %}");
 }
+		
+				html {
+			filter: hue-rotate(30deg) contrast(1.2);
+		}
+		
 		body {
 			color: #6ab2e9;
 			font-family: myFont;
@@ -94,6 +99,7 @@
 			position: fixed;
 			margin-top: 23.7%;
 			margin-left: 2%;
+			filter: hue-rotate(-30deg);
 		}
 		
 		#chosenfileslabel {
@@ -417,7 +423,33 @@
 	<img id="logo" class="responsive" src="{% static 'images/numsuite.png' %}" width="10%" alt="logo">
 	
 	<script>
-
+		
+			
+		function showUpload() {
+			document.getElementById("upload").style.display = "block";
+		}
+		
+		
+		/*function showSuccess() {
+        document.getElementById('success').innerHTML = "SUCCESS";
+    }*/
+		/*function redir() {
+			var dest ='contributorsetmetadata.html?myVar1='+filecount; 
+			document.location = dest;
+			return false;
+		}*/
+		
+		/*var redir = function(handle) {
+				//label.textContent = "Files successfully uploaded";
+				//alert("upped");
+						var dest ='contributorsetmetadata.html?myVar1='+filecount; 
+			document.location = dest;
+			return false;
+				handle.stopImmediatePropagation();
+				handle.preventDefault();
+			};
+		document.getElementById("form").addEventListener("submit", redir, true);*/
+	
 	</script>
 </body>
 </html>
