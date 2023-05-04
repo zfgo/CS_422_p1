@@ -18,10 +18,6 @@ def document_upload_path(instance, filename):
     return f"documents/{instance.task.id}/{filename}"
 
 class Document(models.Model):
-    #TODO set default value for task so it can migrate
-        #python manage.py makemigrations
-        #python manage.py migrate
-        #these steps required to have the form data upload to db
     task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True) # files are associated with a TS forecasting task
     #description = models.CharField(max_length=255, blank=True)
     if_test = models.BooleanField(default=True, null=True) # True for test data, False for train data
@@ -30,9 +26,12 @@ class Document(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     json_data = models.JSONField(null=True)
     id = models.BigAutoField(primary_key=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    set_description = models.CharField(max_length=255, blank=True, null=True)
-    vector_size = models.IntegerField(null=True)
+    fname = models.CharField(max_length=255, blank=True, null=True)
+    fdescription = models.CharField(max_length=255, blank=True, null=True)
+    funits = models.CharField(max_length=255, blank=True, null=True)
+    fvector_size = models.IntegerField(null=True)
+    flength = models.IntegerField(null=True)
+    fsampling_period = models.FloatField(null=True)
 
     def to_json(self):
         # TODO: figure out the file type

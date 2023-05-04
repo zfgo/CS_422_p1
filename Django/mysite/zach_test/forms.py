@@ -44,13 +44,19 @@ class DocumentForm(forms.ModelForm):
 class MetaDataForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ['name','set_description', 'vector_size',] # ('task_desc', 'period', 'n_forecasts', )
+        fields = ['fname','fdescription', 'funits', 'fvector_size', 'flength', 'fsampling_period'] # ('task_desc', 'period', 'n_forecasts', )
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form__input',
-				   'id':'name', 'placeholder':'Name of set', 'autofocus':True}),
-            'set_description': forms.TextInput(attrs={'class':'form__input',
-				   'id':'desc', 'placeholder':'Set description/keywords', 'type':"number"}),
-            'vector_size': forms.TextInput(attrs={'class':'form__input',
+            'fname': forms.TextInput(attrs={'class':'form__input',
+				   'id':'name', 'placeholder':'Name of time series', 'autofocus':True}),
+            'fdescription': forms.TextInput(attrs={'class':'form__input',
+				   'id':'desc', 'placeholder':'Time series description/keywords'}),
+            'funits': forms.TextInput(attrs={'class':'form__input',
+				   'id':'units', 'placeholder':'Units', 'type':"number"}),
+            'fvector_size': forms.TextInput(attrs={'class':'form__input',
 				   'id':'size', 'placeholder':'Vector size', 'type':"number"}),
+            'flength': forms.TextInput(attrs={'class':'form__input',
+				   'id':'length', 'placeholder':'Length', 'type':"number"}),
+            'fsampling_period': forms.TextInput(attrs={'class':'form__input',
+				   'id':'period', 'placeholder':'Sampling period', 'type':"number", 'step':'any'}),
         }
 

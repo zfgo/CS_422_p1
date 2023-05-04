@@ -131,7 +131,7 @@
 			margin: 1rem;
 			padding: 2rem;
 			box-shadow: 0 0 50px rgba(0, 170, 255, 0.9);
-			border-radius: var(--border-radius);
+			border-radius: 54px;
 			background: black;
 		}
 		
@@ -315,12 +315,12 @@
 			top: 1200%;
 		}
 		#submitbutton {
-						margin-left: 77%;
+			margin-left: 0%;
+			border-radius: 54px;
 			background: black;
 			width: fit-content;
-			margin-top: 550%;
-			font-size: 13pt;
-			padding: 1rem 1rem 0.9rem 1rem;
+			font-size: 15pt;
+			padding: 1% 1%;
 		}
 		
 		#test{
@@ -336,24 +336,32 @@
 		#subbox {
 			margin-top: -550%;
 		}
+		
+
 	</style>
 </head>
 </html>
 <body>
-	
-    <h2>Files</h2>
+	<br><br>
+	<div class="container responsive center">
+    <h2>File Metadata</h2>
     <form method="post" enctype="multipart/form-data" id="file_form">
         {% csrf_token %}
        {% for document in documents %}
                 {% if document.task == task_obj %}
                     {% csrf_token %}
+		<h1>hi</h1>
+		{{document.name.as_p}}
                     {{file_form.as_p}}
                     
                {% endif %} 
        {% endfor %}
 	   
-       <button type="submit" class="btn btn-primary"> Submit </button>
+       <button id="submit" type="submit" class="hidden"> Submit </button>
+		<br><br>
+		<label id="submitbutton" for="submit" class="form__button">Submit</label>
     </form>
+	</div>
 	
 	<img id="logo" class="responsive" src="{% static 'images/numsuite.png' %}" width="10%" alt="logo">
 	
