@@ -251,6 +251,20 @@
 			filter: hue-rotate(360deg);
 			transition: filter 3s;
 		}
+		
+		h1{
+			color: #6b74eb;
+		}
+		
+		table, h1 {
+			margin-left: 40%;
+			text-align: left;
+		}
+		th {
+			font-size: 14pt;
+			color: #949bfb;
+		}
+	
 </style>
 </head>     
 
@@ -259,21 +273,23 @@
 <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
 
 
-<h2>Available Files</h2>
+<h1>&nbsp;&nbsp;&nbsp;&nbsp;Available Files<br><br></h1>
 
-<table class="table">
+<table>
    <thead>
        <tr>
            <th>Description</th>
-           <th>Task</th>
+		   <th> </th>
+           <th>&nbsp;&nbsp;Task</th>
        </tr>
    </thead>
    <tbody>
        {% for document in documents %}
            <tr>
                <td>{{document.task_desc}} </td>
+			   <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                <td>
-                   <br><a class="but" href="{% url 'zach_test:download_file' file_id=document.id %}">Download File<br></a><br><br>
+                   <br><br><a class="but" href="{% url 'zach_test:download_file' file_id=document.id %}">Download File<br></a><br><br>
                </td>
            </tr>
        {% endfor %}
