@@ -8,6 +8,13 @@ from django.http import HttpResponse, FileResponse
 from .models import Document, Task
 from .forms import DocumentForm, TaskForm, MetaDataForm
 import zipfile, os
+from django import template
+
+register = template.Library()
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
 
 def model_form_upload(request):
     if request.method == 'POST':
@@ -52,7 +59,6 @@ def document_list(request):
 
     return render(request, 'download.html', {'documents' : task})
 
-
 def zip_folder(folder_path, zip_path):
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for root, _, files in os.walk(folder_path):
@@ -85,12 +91,12 @@ def download_file(request, file_id):
         #response['Content-Disposition'] = 'attachment; filename=' + file.document.name
     return response
     """
-
+"""
 def document_metadata(request):
     if request.method == 'POST':
 
-        task_obj = Task.objects.all()[len(Task.objects.all())-1]
-        """documents = Document.objects.get(task=task_obj)"""
+        task_obj = Task.objects.last()
+        documents = Document.objects.get(task=task_obj)
         documents = Document.objects.all()
         form = MetaDataForm(request.POST)
         if form.is_valid():
@@ -102,6 +108,28 @@ def document_metadata(request):
         task_obj = Task.objects.all()[len(Task.objects.all())-1]
         form = MetaDataForm(request.POST)
         return render(request, 'metadata.html',  {'documents': documents, 'task_obj': task_obj, "file_form": form, })
+"""
+
+def document_metadata(request):
+    if request.method == 'POST':
+
+        task_obj = Task.objects.last()
+        """documents = Document.objects.get(task=task_obj)"""
+        documents = Document.objects.all()
+        form_set = []
+        for doc in documents:
+            if doc.task == task_obj:
+                form_set.append(MetaDataForm(request.POST or None, instance=doc))
+        form = MetaDataForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+        return redirect("/home/")
+    else:
+        documents = Document.objects.all()
+        task_obj = Task.objects.all()[len(Task.objects.all())-1]
+        form = MetaDataForm(request.POST)
+        return render(request, 'metadata.html',  {'documents': documents, 'task_obj': task_obj, "file_form": form,})
 
 def home(request):
     return render(request, 'home.html')
