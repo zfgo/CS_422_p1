@@ -15,6 +15,7 @@ class Task(models.Model):
     id = models.BigAutoField(primary_key=True)
 
 def document_upload_path(instance, filename):
+    print("ran")
     return f"documents/{instance.task.id}/{filename}"
 
 class Document(models.Model):

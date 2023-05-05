@@ -1,4 +1,3 @@
-
 {% load static %}
 <!doctype html>
 <html>
@@ -366,7 +365,7 @@
 			<form class="center responsive fileformcontainer" id="file_form" enctype="multipart/form-data" method="post">
 				<!--    must add to above line:	method="post" action="#"-->
 					 {% csrf_token %}
-					 <label id="document" onchange="showUpload()">
+					 <label id="document">
 					{% for item in file_form %}
 					<div class="form__input-group">
 						{{ item.label }} {{ item }}
