@@ -30,6 +30,7 @@ def convert_json(fname) -> list:
     return time, values
 
 def generate_accuracy(true, pred) -> list:
+    '''Run all accuracy tests from metrics suite'''
     metrics = Accuracy.Run(true, pred)
     return metrics
 

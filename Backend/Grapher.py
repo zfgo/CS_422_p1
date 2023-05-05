@@ -5,6 +5,7 @@
 import matplotlib.pyplot as plt
 
 def graphTS(xtest, ypred, ytrue, xtrain, ytrain, units='s'):
+    '''Graphs a Timeseries given Train data (contrib), Actual data (contrib), Predicted data (DS/MLE)'''
     fig = plt.figure(figsize=(10,6))
     plt.plot(xtrain, ytrain, c='r', linewidth=0.5, label="Training Data", linestyle='--')
     plt.plot(xtest,ytrue,c='g', linewidth=0.5, label="Actual (Contributor)", linestyle='--')
