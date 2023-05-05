@@ -23,7 +23,7 @@ def model_form_upload(request):
         files_list = request.FILES.getlist('document') # this is the field name in the model
         files_list2 = request.FILES.getlist('document2')
         print(file_form.is_valid())
-        if form.is_valid(): #form.is_valid(): and file_form.is_valid()
+        if form.is_valid() and file_form.is_valid(): #form.is_valid(): and file_form.is_valid()
             # set commit to false when calling save returns an object
             # of the model that the modelForm is using, and does not
             # save it to the DB
@@ -34,14 +34,15 @@ def model_form_upload(request):
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
-                
+                doc_instance.fname = doc_instance.document.name.split('/')[-1]
+                print(doc_instance.document.name.split('/')[-1])
             for f in files_list2:
                 doc_instance = Document(document=f, task=task_instance)
                 doc_instance.if_test = False
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
-
+                print(doc_instance.document.name.split('/')[-1])
             return redirect('metadata/')
     else:
         form = TaskForm()
@@ -56,6 +57,7 @@ def get_file_metadata(request, file_id):
 
 def document_list(request):
     task = Task.objects.all()
+    
 
     return render(request, 'download.html', {'documents' : task})
 
@@ -117,17 +119,20 @@ def document_metadata(request):
         qs = Document.objects.filter(task=task_obj)
         document_form_set = modelformset_factory(Document, form=MetaDataForm, extra=0)
         formset = document_form_set(request.POST or None, queryset=qs)
+        print("before check")
         if all([formset.is_valid()]):
-            for form in formset:
-                form.save()
+           # print("valid!")
+            formset.save()
+
         return redirect("/home/")
     else:
         task_obj = Task.objects.last()
         qs = Document.objects.filter(task=task_obj)
         document_form_set = modelformset_factory(Document, form=MetaDataForm, extra=0)
         formset = document_form_set(request.POST or None, queryset=qs) #cat
-        return render(request, 'metadata.html',  {'task_obj': task_obj, "formset" : formset})
+        return render(request, 'metadata.html',  {'task_obj': task_obj, "formset" : formset, 'qs': qs})
 
 def home(request):
     return render(request, 'home.html')
-
+def display_data(request):
+    return render(request, 'data.html')

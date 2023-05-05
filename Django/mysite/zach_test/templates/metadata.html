@@ -362,15 +362,23 @@
     <h1>File Metadata</h1>
     <form method="post" enctype="multipart/form-data" id="file_form">
         {% csrf_token %}
-       {% for document in documents %}
-                {% if document.task == task_obj %}
-                    {% csrf_token %}
-		<br><h3>some file</h3> <!--SHOULD BE NAME OF THE CURRENT FILE-->
-                    {{file_form.as_p}}
-                    
-               {% endif %} 
-       {% endfor %}
-		
+			{% for form in formset %}
+				<h1></h1>
+				{{form.as_p}}
+
+			{%endfor %}
+			<button id="submit" type="submit" class="hidden"> Submit </button>
+
+
+			{% comment %} {% for document in documents %}
+			{% if document.task == task_obj %}
+				{% csrf_token %}
+	<br><h3>some file</h3> <!--SHOULD BE NAME OF THE CURRENT FILE-->
+				{{file_form.as_p}}
+				
+		   {% endif %} 
+   {% endfor %}
+		{% endcomment %}
 		
 					{% for item in form %}
             <div class="form__input-group">
@@ -393,3 +401,4 @@
 	</script>
 	  
   </html>
+

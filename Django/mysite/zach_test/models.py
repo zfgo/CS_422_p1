@@ -15,7 +15,7 @@ class Task(models.Model):
     id = models.BigAutoField(primary_key=True)
 
 def document_upload_path(instance, filename):
-    print("ran")
+    print("")
     return f"documents/{instance.task.id}/{filename}"
 
 class Document(models.Model):
@@ -23,10 +23,11 @@ class Document(models.Model):
     #description = models.CharField(max_length=255, blank=True)
     if_test = models.BooleanField(default=True, null=True) # True for test data, False for train data
     document = models.FileField(upload_to=document_upload_path, validators=[validate_file_extension], null=True)
-    document2 = models.FileField(upload_to=document_upload_path, validators=[validate_file_extension], null=True)
+    document2 = models.FileField(upload_to=document_upload_path, validators=[validate_file_extension], null=True, default=None)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     json_data = models.JSONField(null=True)
     id = models.BigAutoField(primary_key=True)
+    file_name = models.CharField(max_length=255, blank=True, null=True)
     fname = models.CharField(max_length=255, blank=True, null=True)
     fdescription = models.CharField(max_length=255, blank=True, null=True)
     funits = models.CharField(max_length=255, blank=True, null=True)
