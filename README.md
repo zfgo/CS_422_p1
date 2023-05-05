@@ -1,6 +1,12 @@
 # Time Series Forecasting and Benchmarks Repository
 
-TODO: app description 
+The purpose of this application is to act as a central repository for time series (TS) data. 
+Contributors will be able to upload their TS data along with a forecasting task for other users 
+to complete. 
+
+Data scientists or machine learning engineers can download the TS training data sets and 
+create some predicted data. The data scientists can upload their solution data and see how it 
+compares to the TS test data sets that the contributor uploaded.
 
 # Authors: 
 
@@ -17,7 +23,7 @@ Team 1, "zeakz"
 ## Technologies
 
 * Django: High-level Python web framework
-* SQLite Database: Built in to Django
+* SQLite Database: Built-in to Django
 * HTML, CSS, JavaScript: For webpage display and UI design
 
 ## Requirements 
