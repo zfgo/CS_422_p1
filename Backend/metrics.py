@@ -2,15 +2,15 @@
 # DATE : 4/20/2023
 # DESC : module for comparing various model accuracy metrics between (actual, predicted) data
 # AUTHORS : Kareem Taha
-from sklearn.metrics import accuracy_score, mean_absolute_error, mean_absolute_percentage_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error, mean_squared_error
 import numpy as np
 
-class Metrics:
+class Accuracy:
 
     @staticmethod
     def accuracy(true, pred) -> float: 
         '''Returns proportion of properly predicted data'''
-        return accuracy_score(true, pred)
+        return np.sum(true==pred)/len(true)
 
     @staticmethod
     def correlation(true, pred) -> float:
@@ -44,5 +44,6 @@ class Metrics:
     
     @staticmethod
     def Run(true, pred) -> list:
-        return [Metrics.accuracy(true, pred), Metrics.correlation(true, pred), Metrics.MAE(true, pred), Metrics.MAPE(true, pred),
-                Metrics.SMAPE(true, pred), Metrics.MSE(true, pred), Metrics.RMSE(true, pred)]
+        '''Runs all metrics'''
+        return [Accuracy.accuracy(true, pred), Accuracy.correlation(true, pred), Accuracy.MAE(true, pred), Accuracy.MAPE(true, pred),
+                Accuracy.SMAPE(true, pred), Accuracy.MSE(true, pred), Accuracy.RMSE(true, pred)]

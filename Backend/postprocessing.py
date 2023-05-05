@@ -4,8 +4,8 @@
 # AUTHORS : Kareem Taha
 import pandas as pd
 import unittests
-from Metrics import Metrics
-from graph import graph_model
+from Metrics import Accuracy
+from Grapher import graphTS
 import matplotlib.pyplot as plt
 
 
@@ -27,20 +27,19 @@ def convert_json(fname) -> list:
     df = pd.read_json(fname)        # pandas DF containing TS (converted from JSON)
     time = df.iloc[:,0].values      # time values
     values = df.iloc[:,1:].values   # TS values
-    return [time, values]
+    return time, values
 
 def generate_accuracy(true, pred) -> list:
-    metrics = Metrics.Run(true, pred)
+    metrics = Accuracy.Run(true, pred)
     return metrics
 
-def graph_model(x, pred, true, units='s'):
-    fig, ax = plt.subplots(figsize=(5,4))
-    fig.plot(x,true,c='r')
-    fig.plot(x,pred,c='b')
-    ax.set_xlabel(f'Time {units}')
-    ax.set_ylabel(f'Values')
-    ax.set_title('Time Series Actual vs. Predicted')
-    fig.show()
-    return fig
+def model_compare(train, test, mle):
+    '''Returns metrics/graph of DS/MLE model given filenames for: (contributor train, contributor test, DS/MLE prediction)'''
+    xtrain, ytrain = convert_json(train)
+    xtest, ytest = convert_json(test)
+    xmle, ymle = convert_json(mle)
+    metrics = generate_accuracy(ytest, ymle)
+    graph = graphTS(xtest=xtest, ypred=ymle, ytrue=ytest, xtrain=xtrain, ytrain=ytrain)
+    return metrics, graph
 
 def Test(): unittests.run()

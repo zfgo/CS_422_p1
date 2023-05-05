@@ -13,7 +13,8 @@ documents/
 
 # backend test-data
 Backend/test
-
+Backend/test.ipynb
+Backend/Timeseries.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
