@@ -83,4 +83,17 @@ Run the project:
 $ python3 Django/mysite/zach_test/manage.py runserver
 ```
 
-Navigate to the webpage, [http://127.0.0.1:8000/home](http://127.0.0.1:8000/home).
+Navigate to the webpage,
+[http://127.0.0.1:8000/home](http://127.0.0.1:8000/home).
+
+If any issues occur while installing or running the application, please
+contact Zachary Weisenbloom at <zweisenb@uoregon.edu>.
+
+
+### Revision History
+
+Zane Globus-O'Harra - 2023-05-04 - Add brief overview, authors,
+technologies, requirements, installation instructions.
+
+Zane Globus-O'Harra - 2023-05-05 - Add contact Zach W if installation or
+runtime problems occur.
