@@ -35,10 +35,10 @@ class DocumentForm(forms.ModelForm):
            field.label = ""               
     class Meta:
         model = Document
-        fields = ('document','document') # 'document2')
+        fields = ('document','document2') # 'document2')
         widgets = {
             'document': forms.ClearableFileInput(attrs={'multiple': True, 'id':'test', 'name':'test[]'}),
-            'document': forms.ClearableFileInput(attrs={'multiple': True, 'id':'training', 'name':'training[]'}),
+            'document2': forms.ClearableFileInput(attrs={'multiple': True, 'id':'training', 'name':'training[]'}),
         }
 
 

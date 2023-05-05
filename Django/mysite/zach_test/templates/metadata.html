@@ -362,11 +362,9 @@
     <h1>File Metadata</h1>
     <form method="post" enctype="multipart/form-data" id="file_form">
         {% csrf_token %}
-			{% for form in formset %}
-				<h1></h1>
-				{{form.as_p}}
+			{{formset.as_p}}
 
-			{%endfor %}
+
 			<button id="submit" type="submit" class="hidden"> Submit </button>
 
 
@@ -378,7 +376,8 @@
 				
 		   {% endif %} 
    {% endfor %}
-		{% endcomment %}
+		
+
 		
 					{% for item in form %}
             <div class="form__input-group">
@@ -389,8 +388,8 @@
             </div>
 			
         	{% endfor %}
-	   
-       <button id="submit" type="submit" class="hidden"> Submit </button>
+			{% endcomment %}
+       <!--<button id="submit" type="submit" class="hidden"> Submit </button>-->
 		<br><br>
 		<label id="submitbutton" for="submit" class="form__button">Submit</label><br><br><br><br><br><br>
     </form>

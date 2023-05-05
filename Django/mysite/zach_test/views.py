@@ -19,11 +19,11 @@ def get_item(dictionary, key):
 def model_form_upload(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
-        file_form = DocumentForm(request.POST, request.FILES)
+        file_form = DocumentForm((request.POST, request.FILES) or None)
         files_list = request.FILES.getlist('document') # this is the field name in the model
         files_list2 = request.FILES.getlist('document2')
         print(file_form.is_valid())
-        if form.is_valid() and file_form.is_valid(): #form.is_valid(): and file_form.is_valid()
+        if form.is_valid(): #form.is_valid(): and file_form.is_valid()
             # set commit to false when calling save returns an object
             # of the model that the modelForm is using, and does not
             # save it to the DB
@@ -35,15 +35,17 @@ def model_form_upload(request):
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
                 doc_instance.fname = doc_instance.document.name.split('/')[-1]
-                print(doc_instance.document.name.split('/')[-1])
+                doc_instance.document = True
             for f in files_list2:
                 doc_instance = Document(document=f, task=task_instance)
                 doc_instance.if_test = False
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
-                print(doc_instance.document.name.split('/')[-1])
+                doc_instance.document = True
             return redirect('metadata/')
+        else:
+            print(file_form.errors.as_data())
     else:
         form = TaskForm()
         file_form = DocumentForm()
@@ -120,8 +122,8 @@ def document_metadata(request):
         document_form_set = modelformset_factory(Document, form=MetaDataForm, extra=0)
         formset = document_form_set(request.POST or None, queryset=qs)
         print("before check")
-        if all([formset.is_valid()]):
-           # print("valid!")
+        if formset.is_valid():
+        # print("valid!")
             formset.save()
 
         return redirect("/home/")

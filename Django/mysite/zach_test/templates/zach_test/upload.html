@@ -358,10 +358,11 @@
                 {% if item.help_text %}
                     {{ item.help_text|safe }}
                 {% endif %}
+				<button id="submit" type="submit" class="hidden">this tuest</button>
             </div>
 			<br>
         	{% endfor %}
-			
+
 			<form class="center responsive fileformcontainer" id="file_form" enctype="multipart/form-data" method="post">
 				<!--    must add to above line:	method="post" action="#"-->
 					 {% csrf_token %}
@@ -372,9 +373,11 @@
 						{% if item.help_text %}
 							{{ item.help_text|safe }}
 						{% endif %}
+						<button id="submit" type="submit" class="hidden">this tuest</button>
 					</div>
 					<br>
 					{% endfor %}
+				<button id="submit" type="submit" class="hidden">this tuest</button>
 				</form>
 				<button id="submit" type="submit" class="hidden">this tuest</button>
 				<div id="subbox">
