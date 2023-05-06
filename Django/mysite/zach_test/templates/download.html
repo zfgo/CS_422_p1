@@ -291,6 +291,13 @@
                <td>
                    <br><br><a class="but" href="{% url 'zach_test:download_file' file_id=document.id %}">Download File<br></a><br><br>
                </td>
+			   <td>
+				<form method="post" enctype="multipart/form-data" id="file_form">
+				{% csrf_token %}
+				{{form.as_p}}
+				<br><br><button type="submit" class="but" name="button_name" value="{{document.id}}">Submit<br></button><br><br>
+				</form>
+			   </td>>
            </tr>
        {% endfor %}
    </tbody>

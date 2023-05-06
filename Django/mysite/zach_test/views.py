@@ -6,7 +6,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, FileResponse
 from .models import Document, Task
-from .forms import DocumentForm, TaskForm, MetaDataForm
+from .forms import DocumentForm, TaskForm, MetaDataForm, DocumentForm2
 import zipfile, os
 from django import template
 from django.forms.models import modelformset_factory
@@ -57,14 +57,59 @@ def model_form_upload(request):
         'file_form': file_form,
     })
 
+def model_form_upload2(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        file_form = DocumentForm2((request.POST, request.FILES) or None)
+        files_list = request.FILES.getlist('document') # this is the field name in the model
+        files_list2 = request.FILES.getlist('document2')
+        print(file_form.is_valid())
+        if form.is_valid(): #form.is_valid(): and file_form.is_valid()
+            # set commit to false when calling save returns an object
+            # of the model that the modelForm is using, and does not
+            # save it to the DB
+            task_instance = form.save()
+            for f in files_list:
+                doc_instance = Document(document=f, task=task_instance)
+                doc_instance.if_test = True
+                doc_instance.save()
+                doc_instance.to_json() # convert the file to json
+                doc_instance.save() # save the Document model again
+                doc_instance.file_name = doc_instance.document.name.split('/')[-1]
+                doc_instance.save()
+                print(doc_instance.document.name.split('/')[-1])
+
+            return redirect('metadata/')
+        else:
+            print(file_form.errors.as_data())
+    else:
+        form = TaskForm()
+        file_form = DocumentForm()
+    return render(request, 'zach_test/upload.html', {
+        'form': form,
+        'file_form': file_form,
+    })
+
 def get_file_metadata(request, file_id):
     return HttpResponse("test (at file %s)." % file_id)
 
 def document_list(request):
-    task = Task.objects.all()
-    
+    if request.method == 'POST':
+        name = request.POST.get('button_name')
+        print("this is name", name)
+        #the_task = Task.objects.filter(id=name)
+        form = DocumentForm2(request.POST, request.FILES)
+        files_list = request.FILES.getlist('document')
+        file = files_list[0]
+        #doc_instance = Document(document=file, task=the_task)
 
-    return render(request, 'download.html', {'documents' : task})
+        if form.is_valid():
+            doc_instance = form.save()
+        return redirect("/home/")
+    else:
+        task = Task.objects.all()
+        form = DocumentForm2()
+        return render(request, 'download.html', {'documents' : task, 'form': form})
 
 def zip_folder(folder_path, zip_path):
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -73,6 +118,7 @@ def zip_folder(folder_path, zip_path):
                 file_path = os.path.join(root, file)
                 arcname = os.path.relpath(file_path, folder_path)
                 zipf.write(file_path, arcname)
+
 
 def download_file(request, file_id):
     file = get_object_or_404(Task, pk=file_id)

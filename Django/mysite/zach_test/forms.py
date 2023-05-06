@@ -42,6 +42,20 @@ class DocumentForm(forms.ModelForm):
         }
 
 
+class DocumentForm2(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+       super().__init__(*args, **kwargs)
+       for key, field in self.fields.items():
+           field.label = ""               
+    class Meta:
+        model = Document
+        fields = ('document',) # 'document2')
+        widgets = {
+            'document': forms.ClearableFileInput(attrs={'multiple': False, 'id':'test', 'name':'test[]'}),
+        }
+
+
+
 class MetaDataForm(forms.ModelForm):
     class Meta:
         model = Document
@@ -60,4 +74,6 @@ class MetaDataForm(forms.ModelForm):
             'fsampling_period': forms.TextInput(attrs={'class':'form__input',
 				   'id':'period', 'placeholder':'Sampling period', 'type':"number", 'step':'any'}),
         }
+
+
 
