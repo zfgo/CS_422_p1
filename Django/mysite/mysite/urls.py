@@ -16,14 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from userchoose import views
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('fileupload/', include('fileupload.urls')),
-    path('', views.index, name='index'),
+    path("home/", include("zach_test.urls")),
+    path("polls/", include("polls.urls"))
+
 
 ]
-
-urlpatterns += staticfiles_urlpatterns()

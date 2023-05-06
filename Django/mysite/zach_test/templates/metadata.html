@@ -1,0 +1,417 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Numsuite | Contributor Page</title>
+<link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+	<style>
+		
+				@font-face {
+			font-family: myFont;
+			src:url("{% static 'fonts/MundialRegular.otf' %}");
+}
+		body {
+
+			text-align: center;
+			color: #6ab2e9;
+			font-family: myFont;
+			background-color: black;
+			border-radius: 54px;
+		}
+		.file-upload {
+			display: inline-flex;
+			align-items: center;
+			font-size: 15px;
+		}
+		.file-upload__input {
+			display: none;
+		}
+		
+		.file-upload__button {
+			-webkit-appearance: none;
+			background: black;
+			border: 2px solid black;
+			border-radius: 4px;
+			outline: none;
+			padding: 0.5em 0.8em;
+			margin-right: 15px;
+			cursor: pointer;
+		}
+		
+		.file-upload__label {
+			text-align: center;
+			background:linear-gradient(#222530, black);
+			border-radius: 20px;
+			max-width: 1000px;
+			font-size: 0.97em;
+			color: #6ab2e9;
+			text-overflow:ellipsis;
+			overflow: scroll;
+			line-height: 140%;
+			font-family: myFont;
+			margin-top: 14%; 
+			padding-top: 1%;
+			padding-bottom: 4%;
+			padding-left: 15px;
+			padding-right: 15px;
+			z-index: -1;
+		}
+		
+		.responsive{
+		   max-width:100%;
+		   max-height:100%;
+		 }
+
+		.center{
+		  position: absolute;
+		  top: 50%;
+		  left: 50%; 
+		  transform: translate(-50%, -50%);
+		}
+
+		.parent{
+		  position: relative;
+			margin-top: 20%;
+			margin-left: 20%;
+		}
+		
+		button:hover {
+			filter: hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		#upload {
+			margin-top: 20%;
+			display: none;
+			
+		}
+		
+		#choose {
+		
+		}
+		
+		#logo {
+			position:sticky;
+			margin-top: 33.7%;
+			margin-left: 2%;
+			
+		}
+		
+		#chosenfileslabel {
+			transition: textContent 3s;
+		}
+		
+		h1 {
+			text-align: center;
+			position: relative;
+			margin-top: -5%;
+			z-index: 80;
+		}
+		
+		#document {
+		background: black;
+		z-index: -10;
+		color: #6ab2e9;
+		font-size: 11pt;
+	
+		margin-top: 20%;
+		font-family: myFont;
+ 	 position: relative;
+
+	border-radius: 20px;
+			  position: absolute;
+		  top: -500%;
+		  left: -5%; 
+		  transform: translate(-50%, -50%);
+		cursor: pointer;
+			width: 100%;
+		}
+		
+		.container {
+			width: 400px;
+			max-width: 400px;
+			margin: 1rem;
+			padding: 2rem;
+			box-shadow: 0 0 50px rgba(0, 170, 255, 0.9);
+			border-radius: 54px;
+			background: black;
+		}
+		
+		.container, .form__input, .form__button {
+			font-family: myFont;
+		}
+		
+		.form--hidden {
+			display: none;
+		}
+		
+		.form > *:first-child {
+			margin-top: 0;
+		}
+		.form > *:last-child {
+			margin-top: 0;
+		}
+		
+		.form__message {
+			text-align: center;
+			margin-bottom: 1rem;
+		}
+		
+		.form__message--success {
+			color: green;
+		}
+		
+		.form__message--error {
+			color: red;
+		}
+		
+		.form__title {
+			
+			text-align: center;
+			margin-top: -10%;
+		}
+		
+		.form__input-group {
+			margin-top: -10%;
+			margin-bottom: 1rem;
+			
+		}
+		#name, #desc, #size {
+            width: fit-content;
+        }
+		.form__input {
+			display: block;
+			color: #8BE0FF;
+			width: fit-content;
+			padding: 0.75rem;
+			box-sizing: border-box;
+			border-radius: var(--border-radius);
+			border: 3px solid #6ab2e9;
+			outline: none;
+			background:#002B3B;
+			transition: background 0.2s, border-color 0.2s;
+		}
+		
+			.form__input:hover {
+
+			filter: hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		.form__input:focus {
+			color:#8BE0FF;
+			border-color:#8ACBFC;
+			background:#225972;
+		}
+		
+		.form__input--error {
+			color: red;
+			border-color: red;
+		}
+		
+		.form__input-error-message {
+			margin-top: 0.5rem;
+			font-size: 0.85rem;
+			color: red;
+		}
+		
+		.form__button {
+			width: 50%;
+			padding: 1rem 2rem;
+			font-weight: bold;
+			font-size: 1.1rem;
+			color: #6ab2e9;
+			border: 3px solid #6ab2e9;
+			border-radius: var(--border-radius);
+			outline: none;
+			cursor: pointer;
+			background: black;
+			text-align: center;
+			margin-left: 25%;
+		}
+		
+		.form__button:hover {
+			filter:hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		.form__button:active {
+			transform: scale(0.98);
+		}
+		
+		.form__text {
+			text-align: center;
+		}
+		
+		.form__link {
+			color: pink;
+			text-decoration: none;
+			cursor: pointer;
+		}
+		
+		.form__link:hover {
+			text-decoration: underline;
+		}
+		.form__input-group {
+			margin-bottom: 1rem;
+			
+		}
+		
+		.form__input {
+			display: block;
+			color: #8BE0FF;
+			min-width: 250px;
+			padding: 0.75rem;
+			box-sizing: border-box;
+			border-radius: 54px;
+			border: 3px solid #6ab2e9;
+			outline: none;
+			background:#002B3B;
+			transition: background 0.2s, border-color 0.2s;
+			font-family: myFont;
+			margin-top: 5%;
+			
+		}
+		
+		.hidden {
+			display: none;
+		}
+		
+		.fileformcontainer {
+			
+			margin-top: 20%;
+		}
+		
+		.fileformcontainercontainer {
+			margin-top: 205%;
+			margin-left: 90%;
+			width: 1000%;
+			
+		}
+		
+		
+
+		
+		
+		#testbutton {
+
+			background: black;
+			width: fit-content;
+			margin-left: -7%;
+		}
+		#trainingbutton {
+			margin-left: -15%;
+			background: black;
+			width: fit-content;
+		}
+		#submit {
+			margin-top: 500%;
+		}
+		#form {
+			top: -700%;
+		}
+		#tasktitle{
+			top: -500%;
+		}
+		#filetitle{
+			top: 1200%;
+		}
+		#submitbutton {
+			margin-left: 0%;
+			border-radius: 54px;
+			background: black;
+			width: fit-content;
+			font-size: 15pt;
+			padding: 4% 4%;
+		}
+		
+		#test{
+			margin-top: 491%;
+			padding-bottom: 25%;
+			margin-left: 86%;
+		}
+				#training{
+
+			margin-left: 93%;
+		}
+		
+		#subbox {
+			margin-top: -550%;
+		}
+		
+		p, ul {
+			color: black;
+			font-size: 0px;
+		}
+		
+		h1 {
+			margin-top: 30%;
+		}
+		
+		h3 {
+			margin-bottom: 0%;
+			text-align: center;
+			width: fit-content;
+			padding: 0.5rem 0.5rem;
+			background: #032635;
+			border-radius: 24px;
+			font-size: 11pt;
+		}
+		
+		@keyframes shift {
+		  from {
+			filter: hue-rotate(0deg);
+			  
+		  }
+
+		  to {
+			filter: hue-rotate(360deg);
+		  }
+		}
+
+		h3 {
+			
+		  animation-duration: 50s;
+		  animation-name: shift;
+		  animation-iteration-count: infinite;
+		  animation-direction: alternate;
+
+	</style>
+</head>
+</html>
+<body>
+	<br><br>
+	<div class="responsive center">
+    <h1>File Metadata</h1>
+    <form method="post" enctype="multipart/form-data" id="file_form">
+        {% csrf_token %}
+		{{ formset.management_form }}
+		 {% for doc,form in qs_and_form %}
+				{% csrf_token %}
+				<br><h3>{{doc.file_name}}</h3> <!--SHOULD BE NAME OF THE CURRENT FILE-->
+				{{form.as_p}}
+   {% endfor %}
+		
+		{%comment%}
+					{% for item in form %}
+            <div class="form__input-group">
+                {{ item.label }} {{ item }}
+                {% if item.help_text %}
+                    {{ item.help_text|safe }}
+                {% endif %}
+            </div>
+			
+        	{% endfor %}
+			{% endcomment %}
+       <button id="submit" type="submit" class="hidden"> Submit </button>
+		<br><br>
+		<label id="submitbutton" for="submit" class="form__button">Submit</label><br><br><br><br><br><br>
+    </form>
+	</div>
+	
+	
+	<script>
+	</script>
+	  
+  </html>

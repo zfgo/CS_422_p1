@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Numsuite | Participant Page</title>
+<link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+	<style>
+		
+				@font-face {
+			font-family: myFont;
+			src:url("{% static 'fonts/MundialRegular.otf' %}");
+		}
+		body {
+			font-family: myFont;
+			background-color: black;
+			color: #b5beff;
+		}
+		.flex-container {
+			display: flex;
+		}
+
+		.flex-child {
+			flex: 1;
+			border: 0px solid yellow;
+		}  
+
+		.flex-child:first-child {
+			margin-right: 20px;
+		}  
+		.file-upload {
+			display: inline-flex;
+			align-items: center;
+			font-size: 15px;
+		}
+		.file-upload__input {
+			display: none;
+		}
+		
+		.file-upload__button {
+			-webkit-appearance: none;
+			background: black;
+			border: 2px solid black;
+			border-radius: 4px;
+			outline: none;
+			padding: 0.5em 0.8em;
+			margin-right: 15px;
+			cursor: pointer;
+		}
+		
+		.file-upload__label {
+			text-align: center;
+			background:linear-gradient(#222530, black);
+			border-radius: 20px;
+			max-width: 1000px;
+			font-size: 0.97em;
+			color: #6a83e9;
+			text-overflow:ellipsis;
+			overflow: scroll;
+			line-height: 140%;
+			font-family: myFont;
+			margin-top: 30%; 
+			padding-top: 1%;
+			padding-bottom: 4%;
+			padding-left: 15px;
+			padding-right: 15px;
+			z-index: -1;
+		}
+		
+		.responsive{
+		   max-width:100%;
+		   max-height:100%;
+		 }
+
+		.center{
+		  position: absolute;
+		  top: 50%;
+		  left: 35%; 
+		  transform: translate(-50%, -50%);
+		}
+
+		.parent{
+		  position: relative;
+			margin-top: 20%;
+			margin-left: 20%;
+		}
+		
+		button:hover {
+			filter: hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		#upload {
+			margin-top: 20%;
+			display: none;
+			padding-top: 30%;
+			z-index: -2;
+		}
+		
+		#choose {
+			margin-top: -5%;
+		}
+		
+		#logo {
+			position: fixed;
+			margin-top: 33%;
+			margin-left: 2%;
+		}
+	
+		
+		.dropdown {
+			z-index: 4;
+			margin-top: 110%;
+
+		}
+/*the container must be positioned relative:*/
+.custom-select {
+	font-family: myFont;
+  position: relative;
+	border: 4px solid #b5beff;
+	border-radius: 20px;
+	margin-top: -5%;
+			  position: absolute;
+		  top: 20%;
+		  left: 35%; 
+		  transform: translate(-50%, -50%);
+	
+
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+
+}
+
+.select-selected {
+  background-color: black;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #b5beff transparent transparent transparent;
+
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #b5beff transparent;
+  top: 7px;
+}
+	
+	.select-selected:hover {
+					filter: hue-rotate(360deg);
+			transition: filter 3s;
+	}
+
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  color: #b5beff;
+  padding: 8px 16px;
+  border-color: transparent transparent rgba(30, 42, 130, 0.9) transparent;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 20px;
+
+}
+
+/*style items (options):*/
+.select-items {
+
+  position: absolute;
+  background-color: black;
+  top: 112%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border-radius: 20px;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+	
+
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(30, 42, 130, 0.9);
+}
+	
+	#participant {
+		background: black;
+		z-index: -10;
+		color: #b5beff;
+		font-size: 11pt;
+		padding: 0.6rem 1rem 1.4rem 1rem;
+		margin-top: 20%;
+		font-family: myFont;
+ 	 position: relative;
+	border: 4px solid #b5beff;
+	border-radius: 20px;
+			  position: absolute;
+		  top: 20%;
+		  left: 35%; 
+		  transform: translate(-50%, -50%);
+		cursor: pointer;
+	}
+		
+		
+	
+	td {
+		padding: 10% -50%;
+	}
+	
+	a, button, input, label {
+		
+		border: 3px solid #b5beff;
+		border-radius: 24px;
+		font-family: myFont;
+		font-size: 12pt;
+		padding: 1rem;
+
+	}
+		
+		h2 {
+			color: #7875d2;
+		}
+		
+		.but {
+			display: block;
+			color: #b5beff;
+			width: 100%;
+			padding: 0.75rem;
+			box-sizing: border-box;
+			border-radius: 50px;
+			border: 3px solid #b5beff;
+			outline: none;
+			background:#0c1743;
+			transition: background 0.2s, border-color 0.2s;
+			text-decoration: none;
+		}
+		
+			.but:hover {
+
+			filter: hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		h1{
+			color: #6b74eb;
+		}
+		
+		table, h1 {
+			margin-left: 25%;
+			text-align: left;
+		}
+		th {
+			font-size: 14pt;
+			color: #949bfb;
+		}
+		
+		.hidden {
+			display: none;
+		}
+		#text { color: black; }
+</style>
+</head>     
+
+<body>
+
+<!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
+
+
+<h1>&nbsp;&nbsp;&nbsp;&nbsp;Available Files<br><br></h1>
+
+<table>
+   <thead>
+       <tr>
+           <th>Description</th>
+		   <th> </th>
+           <th>&nbsp;&nbsp;Task</th>
+		   <th> </th>
+		   <th>&nbsp;&nbsp;Solution</th>
+		   <th> </th>
+		   <th>&nbsp;&nbsp;</th>
+       </tr>
+   </thead>
+   <tbody>
+	<!--Iterate through task objects and display them as download links. also provide location for contributor upload data.-->
+       {% for document in documents %}
+	   		<form method="post" enctype="multipart/form-data" id="file_form">
+           <tr>
+               <td>{{document.task_desc}} </td>
+			   <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+               <td>
+                   <br><br><a class="but" href="{% url 'zach_test:download_file' file_id=document.id %}">Download File<br></a><br><br>
+               </td>
+			   <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			   <td>
+					{% csrf_token %}
+					{{form.as_p}}
+					
+				
+	   			   <br><br><label class="but" for="choose">Upload Solution<br></label><br><br><td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					  <td><br><br><button type="submit" class="but" name="button_name" value="{{document.id}}">Submit<br></button><br><br></td>>
+			   </td>
+			   <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			   <td>
+			   </td>
+			   	   
+           </tr>
+	   </form>
+       {% endfor %}
+   </tbody>
+</table>
+
+<script>
+</script>
+
+</body>
+</html>
+
+
+{% comment %}
+<!--   
+   <tbody>
+       {% for document in documents %}
+           <tr>
+               <td>{{document.task_desc}} </td>
+			   <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+               <td>
+                   <br><br><a class="but" href="{% url 'zach_test:download_file' file_id=document.id %}">Download File<br></a><br><br>
+               </td>
+			   <td>
+				<form method="post" enctype="multipart/form-data" id="file_form">
+				{% csrf_token %}
+				{{form.as_p}}
+				<br><br><button type="submit" class="but" name="button_name" value="{{document.id}}">Submit<br></button><br><br>
+				</form>
+			   </td>>
+           </tr>
+       {% endfor %}
+   </tbody>
+</table>
+
+<script>
+</script>
+
+</body>
+</html>
+-->
+{% endcomment %}

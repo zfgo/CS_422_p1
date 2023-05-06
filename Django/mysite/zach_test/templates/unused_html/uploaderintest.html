@@ -1,0 +1,281 @@
+
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Numsuite | Contributor Page</title>
+<link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+	<style>
+		
+		@font-face {
+			font-family: myFont;
+			src:url("{% static 'fonts/MundialRegular.otf' %}");
+}
+		body {
+			color: #6ab2e9;
+			font-family: myFont;
+			background-color: black;
+		}
+		.file-upload {
+			display: inline-flex;
+			align-items: center;
+			font-size: 15px;
+		}
+		.file-upload__input {
+			display: none;
+		}
+		
+		.file-upload__button {
+			-webkit-appearance: none;
+			background: black;
+			border: 2px solid black;
+			border-radius: 4px;
+			outline: none;
+			padding: 0.5em 0.8em;
+			margin-right: 15px;
+			cursor: pointer;
+		}
+		
+		.file-upload__label {
+			text-align: center;
+			background:linear-gradient(#222530, black);
+			border-radius: 20px;
+			max-width: 1000px;
+			font-size: 0.97em;
+			color: #6ab2e9;
+			text-overflow:ellipsis;
+			overflow: scroll;
+			line-height: 140%;
+			font-family: myFont;
+			margin-top: 14%; 
+			padding-top: 1%;
+			padding-bottom: 4%;
+			padding-left: 15px;
+			padding-right: 15px;
+			z-index: -1;
+		}
+		
+		.responsive{
+		   max-width:100%;
+		   max-height:100%;
+		 }
+
+		.center{
+		  position: absolute;
+		  top: 50%;
+		  left: 35%; 
+		  transform: translate(-50%, -50%);
+		}
+
+		.parent{
+		  position: relative;
+			margin-top: 20%;
+			margin-left: 20%;
+		}
+		
+		button:hover {
+			filter: hue-rotate(360deg);
+			transition: filter 3s;
+		}
+		
+		#upload {
+			margin-top: 20%;
+			display: none;
+			
+		}
+		
+		#choose {
+			
+		}
+		
+		#logo {
+			position: fixed;
+			margin-top: 23.7%;
+			margin-left: 2%;
+		}
+		
+		#chosenfileslabel {
+			transition: textContent 3s;
+		}
+		
+		h1 {
+			text-align: center;
+			position: relative;
+			margin-top: -5%;
+			z-index: 80;
+		}
+		
+		.document {
+		background: black;
+		z-index: -10;
+		color: #b5beff;
+		font-size: 11pt;
+		padding: 0.6rem 1rem 1.4rem 1rem;
+		margin-top: 20%;
+		font-family: myFont;
+ 	 position: relative;
+	border: 4px solid #b5beff;
+	border-radius: 20px;
+			  position: absolute;
+		  top: 20%;
+		  left: 35%; 
+			left:0%;
+		  transform: translate(-50%, -50%);
+		cursor: pointer;
+		}
+		
+		
+	</style>
+</head>
+
+<body>
+	<div class="parent">
+		<h1 class="center responsive">Upload time series set</h1>
+	<div class="file-upload">
+		
+		<form id="form" enctype="multipart/form-data" method="post">
+		<!--    must add to above line:	method="post" action="#"-->
+			 {% csrf_token %}
+			 <label class="document" onchange="showUpload()">{{ form.as_p }}</label>
+			<!--<input class="file-upload__input responsive center" type="file" accept=".json,.csv,.xlsx,.xls" name="myFile[]" id="myFile" onchange="showUpload()" multiple>-->
+			<button id="choose" class="file-upload__button responsive center" type="button"><img src="{% static 'images/contributorchoose.png' %}" alt="Choose files" width="300" onmouseover="this.src='{% static 'images/contributorchoosehighlight.png' %}'"
+		onmouseout="this.src='{% static 'images/contributorchoose.png' %}'"></button>
+			<span id="chosenfileslabel" class="file-upload__label responsive center">No files chosen<br><span style="color: #337682">&#40; .csv &nbsp;.xlsx&nbsp; .json&#41;</span></span>
+			<span id="scroll" class="responsive center"></span>
+			<button id="upload" class="file-upload__button responsive center" type="submit" value="submit" ><img src="{% static 'images/contributorcontinue.png' %}" alt="Continue with selected files" width="300" onmouseover="this.src='{% static 'images/contributorcontinuehighlight.png' %}'"
+		onmouseout="this.src='{% static 'images/contributorcontinue.png' %}'" onClick="document.getElementById('form').disabled = true;"></button>
+			<button type="submit">Upload</button>
+		</form>
+		
+
+		<!--<form id="form" method="post" enctype="multipart/form-data">
+		  {% csrf_token %}
+		  
+		  <p>
+			  {{ form.description }}
+		  </p>
+		  <p>
+			  {{ form.document }}
+		  </p>
+		  
+		  {{ form.as_p }}
+		  <button type="submit">Upload</button>
+		</form>-->
+		
+		
+		
+	</div>
+	</div>
+	<img id="logo" class="responsive" src="{% static 'images/numsuite.png' %}" width="10%" alt="logo">
+	
+	<script>
+		Array.prototype.forEach.call(document.querySelectorAll('.file-upload__button'), function(button) {
+			const hiddenInput = button.parentElement.querySelector('.document');
+			const label = button.parentElement.querySelector('.file-upload__label');
+			
+			button.addEventListener('click', function() {
+				hiddenInput.click();
+			})
+			
+			hiddenInput.addEventListener('change', function() {
+				const filenameList = Array.prototype.map.call(hiddenInput.files, function(file) {
+					return file.name;
+				})
+
+				label.textContent = filenameList.join(', \xa0 \xa0 \xa0') || "No files chosen";
+
+			})
+											/*if(filenameList.length == 0) {
+												document.getElementById("upload").style.display = "none";
+											}*/
+			/*document.getElementById("myFile").addEventListener("change", function() {
+				var filecount = this.files.length;
+				var dest ='contributorsetmetadata.html?filecount='+filecount;
+				//document.getElementById("myFile").addEventListener("submit", function() {
+					window.location.href = dest;
+					return false;
+				//});
+			});*/
+			var submitted = false;
+			document.getElementById("form").addEventListener("submit", function(event) { //construct query string and redirect
+				event.preventDefault(); // prevent the default form submission
+				event.stopImmediatePropagation();
+				submitted = true;
+				var filecount = document.getElementById("myFile").files.length;
+
+				var dest ='contributorforecast.html?filecount='+filecount;
+				var inp = document.getElementById('myFile');
+				for(var i=0;i<inp.files.length;i++) {
+					var name = inp.files.item(i).name;
+					dest = dest + "&files[]=" + name;
+				}
+				window.location.href = dest;
+				return false;
+			});
+			
+			document.getElementById("upload").addEventListener("click", function(event) {
+				submitted = true;
+				
+			});
+			
+			document.getElementById("myFile").addEventListener("click", function(event) {
+				if(/*document.getElementById("myFile").files.length > 0*/submitted) {
+					event.preventDefault(); // prevent the default form submission
+					event.stopImmediatePropagation();
+				}	
+			});
+			
+			//
+			
+			
+			
+			 
+			/*document.getElementById('form').addEventListener('submit', function(handle) {
+				label.textContent = "Files successfully uploaded";
+				alert("upped");
+				handle.stopImmediatePropagation()
+				handle.preventDefault()
+			});*/
+        
+			/*if(filenameList.length > 0) {
+			//document.write(filenameList.length);
+			document.getElementById("upload").setAttribute("display", "block");
+			}*/
+		})
+		function showUpload() {
+			document.getElementById("upload").style.display = "block";
+		}
+		
+		function uploadSuccess() {
+										/*label = document.getElementById("chosenfileslabel");
+										label.textContent = "Upload successful";
+										document.getElementById("upload").style.display = "none";*/
+			//label.opacity = 0;
+		}
+		
+		/*function showSuccess() {
+        document.getElementById('success').innerHTML = "SUCCESS";
+    }*/
+		/*function redir() {
+			var dest ='contributorsetmetadata.html?myVar1='+filecount; 
+			document.location = dest;
+			return false;
+		}*/
+		
+		/*var redir = function(handle) {
+				//label.textContent = "Files successfully uploaded";
+				//alert("upped");
+						var dest ='contributorsetmetadata.html?myVar1='+filecount; 
+			document.location = dest;
+			return false;
+				handle.stopImmediatePropagation();
+				handle.preventDefault();
+			};
+		document.getElementById("form").addEventListener("submit", redir, true);*/
+	
+		
+		
+	</script>
+</body>
+</html>
