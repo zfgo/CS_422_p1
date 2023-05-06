@@ -96,15 +96,12 @@ def get_file_metadata(request, file_id):
 def document_list(request):
     if request.method == 'POST':
         name = request.POST.get('button_name')
-        print("this is name", name)
-        #the_task = Task.objects.filter(id=name)
+        the_task = Task.objects.filter(id=name)[0]
+        
         form = DocumentForm2(request.POST, request.FILES)
-        files_list = request.FILES.getlist('document')
-        file = files_list[0]
-        #doc_instance = Document(document=file, task=the_task)
-
-        if form.is_valid():
-            doc_instance = form.save()
+        file = request.FILES.get('document')
+        doc_instance = Document(document=file, task=the_task)
+        doc_instance.save()
         return redirect("/home/")
     else:
         task = Task.objects.all()
