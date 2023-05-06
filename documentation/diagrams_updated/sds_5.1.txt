@@ -1,0 +1,21 @@
+title User creates an account
+
+actor User input
+participant Sign up view
+database Database
+
+User input->Sign up view:email, username, password
+activate Sign up view
+Sign up view->Database:check if username or email already exists
+activate Database
+alt invalid information
+Sign up view<--Database:information is invalid
+User input<-Sign up view:request different username or email
+else valid information
+Sign up view<--Database:information is valid
+Sign up view->Database:create account model
+Sign up view<--Database:account information saved
+deactivate Database
+User input<-Sign up view:account successfully created
+deactivate Sign up view
+end

@@ -1,0 +1,21 @@
+title Participant downloads TS training data
+
+actor User input
+participant Participant download view
+database Database
+
+Participant download view->Database:fetch all forecasting tasks
+activate Database
+activate Participant download view
+Participant download view<--Database:provide forecasting tasks
+deactivate Database
+User input<-Participant download view:display forecasting tasks
+User input->Participant download view:select forecasting task
+User input->Participant download view:select file type
+Participant download view->Database:request files
+activate Database
+Participant download view<--Database:converted files
+deactivate Database
+User input<--Participant download view:files available for download
+deactivate Participant download view
+

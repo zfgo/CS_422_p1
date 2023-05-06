@@ -1,0 +1,22 @@
+title Participant uploads solution data
+
+actor User input
+participant Participant upload view
+database Database
+participant Comparison metrics
+
+
+User input->Participant upload view:select forecasting task
+activate Participant upload view
+Participant upload view->Database:fetch forecasting task
+activate Database
+Database-->Comparison metrics:task test data
+deactivate Database
+activate Comparison metrics
+User input->Participant upload view:upload solution data
+Participant upload view-->Comparison metrics:convert file format
+Participant upload view<--Comparison metrics:metrics, statistics, graphs
+deactivate Comparison metrics
+User input<--Participant upload view:display metrics, statistics, graphs
+deactivate Participant upload view
+

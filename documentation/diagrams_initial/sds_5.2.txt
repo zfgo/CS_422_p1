@@ -1,0 +1,18 @@
+title Contributor uploads forecasting task and TS data
+
+actor User input
+participant contributor upload view
+database Database
+
+User input->contributor upload view:forecasting task
+activate contributor upload view
+contributor upload view->Database:create task model
+activate Database
+User input->contributor upload view:uploaded files
+contributor upload view->Database:create document model
+User input->contributor upload view:TS metadata
+contributor upload view->Database:update document model
+contributor upload view<--Database:task and files saved successfully
+deactivate Database
+User input<--contributor upload view:success
+deactivate contributor upload view
