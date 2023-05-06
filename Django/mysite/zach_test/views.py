@@ -11,6 +11,7 @@ import zipfile, os
 from django import template
 from django.forms.models import modelformset_factory
 register = template.Library()
+from .postprocessing import generate_metrics
 
 @register.filter
 def get_item(dictionary, key):
@@ -48,6 +49,8 @@ def model_form_upload(request):
                 doc_instance.file_name = doc_instance.document.name.split('/')[-1]
                 doc_instance.save()
 
+            generate_metrics()
+
             return redirect('metadata/')
         else:
             print(file_form.errors.as_data())
@@ -75,7 +78,6 @@ def document_list(request):
         doc_instance.to_json() #convert file to json and store in json field 
         doc_instance.save()
         return redirect("/home/")
-    
     else:
         task = Task.objects.all()
         form = DocumentForm2()
@@ -134,5 +136,6 @@ def document_metadata(request):
 def home(request):
     """The home page. links to all other pages. """
     return render(request, 'home.html')
+
 def display_data(request):
     return render(request, 'data.html')

@@ -7,6 +7,7 @@ import pandas as pd
 import os
 import django
 import json
+import sklearn
 import Backend.Grapher as Grapher
 from django.core.files.base import ContentFile
 django.setup()
