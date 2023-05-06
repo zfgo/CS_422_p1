@@ -55,4 +55,4 @@ def generate_metrics():
                 doc.solution.save(name=f'{name}.json', content=file)
                 doc.save()
             else: print('the document is not classified as any set')
-generate_metrics()
+
