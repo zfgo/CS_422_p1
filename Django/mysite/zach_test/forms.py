@@ -41,7 +41,6 @@ class DocumentForm(forms.ModelForm):
             'document2': forms.ClearableFileInput(attrs={'multiple': True, 'id':'training', 'name':'training[]'}),
         }
 
-
 class DocumentForm2(forms.ModelForm):
     def __init__(self, *args, **kwargs):
        super().__init__(*args, **kwargs)
@@ -62,17 +61,17 @@ class MetaDataForm(forms.ModelForm):
         fields = ['fname','fdescription', 'funits', 'fvector_size', 'flength', 'fsampling_period'] # ('task_desc', 'period', 'n_forecasts', )
         widgets = {
             'fname': forms.TextInput(attrs={'class':'form__input',
-				   'id':'name', 'placeholder':'Name of time series', 'autofocus':True}),
+				   'id':'name', 'placeholder':'Name of time series', 'autofocus':True, 'required':True}),
             'fdescription': forms.TextInput(attrs={'class':'form__input',
-				   'id':'desc', 'placeholder':'Time series description/keywords'}),
+				   'id':'desc', 'placeholder':'Time series description/keywords', 'required':True}),
             'funits': forms.TextInput(attrs={'class':'form__input',
-				   'id':'units', 'placeholder':'Units'}),
+				   'id':'units', 'placeholder':'Units','required':True}),
             'fvector_size': forms.TextInput(attrs={'class':'form__input',
-				   'id':'size', 'placeholder':'Vector size', 'type':"number"}),
+				   'id':'size', 'placeholder':'Vector size', 'type':"number",'required':True}),
             'flength': forms.TextInput(attrs={'class':'form__input',
-				   'id':'length', 'placeholder':'Length', 'type':"number"}),
+				   'id':'length', 'placeholder':'Length', 'type':"number",'required':True}),
             'fsampling_period': forms.TextInput(attrs={'class':'form__input',
-				   'id':'period', 'placeholder':'Sampling period', 'type':"number", 'step':'any'}),
+				   'id':'period', 'placeholder':'Sampling period', 'type':"number", 'step':'any','required':True}),
         }
 
 
