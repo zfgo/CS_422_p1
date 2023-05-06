@@ -15,7 +15,11 @@ class Accuracy:
     @staticmethod
     def correlation(true, pred) -> float:
         '''Returns correlation between (actual, predicted) data'''
-        return np.corrcoef(true,pred)[0,1]
+        print("here", true, pred)
+        if len(true) == len(pred):
+            return np.corrcoef(true,pred)[0,1]
+        else:
+            return np.corrcoef([0],[0])[0,1]
 
     @staticmethod
     def MAE(true, pred) -> float:
@@ -30,7 +34,7 @@ class Accuracy:
     @staticmethod
     def SMAPE(true, pred) -> float:
         '''Returns SMAPE (Symmetric-Mean-Absolute-Percentage-Error) score, which is the expected % deviation from the average ([true + pred]/2) score'''
-        return 1/len(true) * np.sum(2 * np.abs(pred-true) / (np.abs(true) + np.abs(pred))*100) # manual calculation because SKLEARN does not include sMAPE
+        return 1/(len(true)+.0001) * np.sum(2 * np.abs(pred-true) / (np.abs(true) + np.abs(pred) + .001)*100) # manual calculation because SKLEARN does not include sMAPE
 
     @staticmethod
     def MSE(true, pred) -> float:
@@ -45,7 +49,9 @@ class Accuracy:
     @staticmethod
     def Run(true, pred) -> dict:
         '''Runs all metrics and returns as a dict'''
+        if(true.dtype in ['str', 'str32', 'str64'] or pred.dtype in ['str','str32','str64']): return{'error':'cannot create metrics because time value is in strings'}
         return {'accuracy':Accuracy.accuracy(true, pred), 'MAE':Accuracy.correlation(true, pred), 
                 'MAPE':Accuracy.MAE(true, pred), 'MAPE':Accuracy.MAPE(true, pred), 
                 'SMAPE': Accuracy.SMAPE(true, pred), 'MSE':Accuracy.MSE(true, pred), 
                 'RMSE':Accuracy.RMSE(true, pred)}
+    

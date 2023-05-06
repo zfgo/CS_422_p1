@@ -3,6 +3,8 @@
 # DESC : module for creating graph figures meant to be passed to the DJango framework for display
 # AUTHORS : Kareem Taha
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('agg')
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.core.files.images import ImageFile
 import io

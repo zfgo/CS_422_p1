@@ -27,7 +27,7 @@ class Document(models.Model):
     its test training or contributor. """
     task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True) # files are associated with a TS forecasting task
     description = models.CharField(max_length=255, blank=True)
-    if_test = models.BooleanField(default=True, null=True) # True for test data, False for train data
+    is_test = models.BooleanField(default=True, null=True) # True for test data, False for train data
     document = models.FileField(upload_to=document_upload_path, validators=[validate_file_extension], null=True)
     document2 = models.FileField(upload_to=None, validators=[validate_file_extension], null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
@@ -42,7 +42,8 @@ class Document(models.Model):
     fsampling_period = models.FloatField(null=True)
     image = models.ImageField(upload_to=metrics_upload_path, null=True)
     solution = models.FileField(upload_to=metrics_upload_path, null=True)
-
+    is_mle = models.BooleanField(default=False, null=True)
+    is_train = models.BooleanField(default=False, null=True)
 
     def to_json(self):
         """converts file to json"""
@@ -134,7 +135,8 @@ def csv_to_json(csv_file_name, time_column_index=1):
                 row_data = {}
                 for i in range(len(header)):
                     if i == time_column_index:
-                        row_data[header[i]] = float(row[i])
+                        try: row_data[header[i]] = float(row[i])
+                        except ValueError: row_data[header[i]] = row[i]
                     else:
                         row_data[header[i]] = float(row[i])
                 data.append(row_data)

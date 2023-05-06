@@ -7,11 +7,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, FileResponse
 from .models import Document, Task
 from .forms import DocumentForm, TaskForm, MetaDataForm, DocumentForm2
-import zipfile, os
+import zipfile, os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # add parent dir to path to import 'postprocessing'
 from django import template
-from mysite.postprocessing import generate_metrics
+import postprocessing
 from django.forms.models import modelformset_factory
 register = template.Library()
+
 
 @register.filter
 def get_item(dictionary, key):
@@ -33,7 +35,9 @@ def model_form_upload(request):
             task_instance = form.save()
             for f in files_list:
                 doc_instance = Document(document=f, task=task_instance)
-                doc_instance.if_test = True
+                doc_instance.is_test = True
+                doc_instance.is_mle = False
+                doc_instance.is_train = False
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
@@ -42,14 +46,17 @@ def model_form_upload(request):
                 print(doc_instance.document.name.split('/')[-1])
             for f in files_list2:
                 doc_instance = Document(document=f, task=task_instance)
-                doc_instance.if_test = False
+                doc_instance.is_test = False
+                doc_instance.is_mle = False
+                doc_instance.is_train = True
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
                 doc_instance.file_name = doc_instance.document.name.split('/')[-1]
                 doc_instance.save()
+                print(doc_instance.document.name.split('/')[-1])
                 
-            generate_metrics()
+    
             return redirect('metadata/')
         else:
             print(file_form.errors.as_data())
@@ -73,9 +80,13 @@ def document_list(request):
         form = DocumentForm2(request.POST, request.FILES)  #get the form 
         file = request.FILES.get('document') #get the file 
         doc_instance = Document(document=file, task=the_task) #assign the file to the form 
+        doc_instance.is_test = False
+        doc_instance.is_mle = True
+        doc_instance.is_train = False
         doc_instance.save()
         doc_instance.to_json() #convert file to json and store in json field 
         doc_instance.save()
+        postprocessing.generate_metrics()
         return redirect("/home/")
     
     else:
