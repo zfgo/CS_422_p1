@@ -18,6 +18,8 @@ Data scientists or machine learning engineers can download the TS training data 
 create some predicted data. The data scientists can upload their solution data and see how it 
 compares to the TS test data sets that the contributor uploaded.
 
+For in-depth documentation, see `documentation/`
+
 ## Authors: 
 
 CS 422 at the University of Oregon 
