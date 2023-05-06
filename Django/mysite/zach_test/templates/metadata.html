@@ -362,23 +362,14 @@
     <h1>File Metadata</h1>
     <form method="post" enctype="multipart/form-data" id="file_form">
         {% csrf_token %}
-			{{formset.as_p}}
-
-
-			<button id="submit" type="submit" class="hidden"> Submit </button>
-
-
-			{% comment %} {% for document in documents %}
-			{% if document.task == task_obj %}
+		{{ formset.management_form }}
+		 {% for doc,form in qs_and_form %}
 				{% csrf_token %}
-	<br><h3>some file</h3> <!--SHOULD BE NAME OF THE CURRENT FILE-->
-				{{file_form.as_p}}
-				
-		   {% endif %} 
+				<br><h3>{{doc.file_name}}</h3> <!--SHOULD BE NAME OF THE CURRENT FILE-->
+				{{form.as_p}}
    {% endfor %}
 		
-
-		
+		{%comment%}
 					{% for item in form %}
             <div class="form__input-group">
                 {{ item.label }} {{ item }}
@@ -389,7 +380,7 @@
 			
         	{% endfor %}
 			{% endcomment %}
-       <!--<button id="submit" type="submit" class="hidden"> Submit </button>-->
+       <button id="submit" type="submit" class="hidden"> Submit </button>
 		<br><br>
 		<label id="submitbutton" for="submit" class="form__button">Submit</label><br><br><br><br><br><br>
     </form>

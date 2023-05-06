@@ -34,15 +34,18 @@ def model_form_upload(request):
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
-                doc_instance.fname = doc_instance.document.name.split('/')[-1]
-                doc_instance.document = True
+                doc_instance.file_name = doc_instance.document.name.split('/')[-1]
+                doc_instance.save()
+                print(doc_instance.document.name.split('/')[-1])
             for f in files_list2:
                 doc_instance = Document(document=f, task=task_instance)
                 doc_instance.if_test = False
                 doc_instance.save()
                 doc_instance.to_json() # convert the file to json
                 doc_instance.save() # save the Document model again
-                doc_instance.document = True
+                doc_instance.file_name = doc_instance.document.name.split('/')[-1]
+                doc_instance.save()
+
             return redirect('metadata/')
         else:
             print(file_form.errors.as_data())
@@ -116,6 +119,7 @@ def document_metadata(request):
 
 def document_metadata(request):
     if request.method == 'POST':
+        print("post")
         task_obj = Task.objects.last()
         """documents = Document.objects.get(task=task_obj)"""
         qs = Document.objects.filter(task=task_obj)
@@ -128,11 +132,13 @@ def document_metadata(request):
 
         return redirect("/home/")
     else:
+        print("not post")
         task_obj = Task.objects.last()
         qs = Document.objects.filter(task=task_obj)
         document_form_set = modelformset_factory(Document, form=MetaDataForm, extra=0)
         formset = document_form_set(request.POST or None, queryset=qs) #cat
-        return render(request, 'metadata.html',  {'task_obj': task_obj, "formset" : formset, 'qs': qs})
+        qs_and_form = zip(qs,formset)
+        return render(request, 'metadata.html',  {'task_obj': task_obj, "formset" : formset, 'qs': qs, 'qs_and_form': qs_and_form})
 
 def home(request):
     return render(request, 'home.html')
