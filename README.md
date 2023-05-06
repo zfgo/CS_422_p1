@@ -1,5 +1,15 @@
 # Time Series Forecasting and Benchmarks Repository
 
+## Revision History
+
+Zane Globus-O'Harra - 2023-05-04 - Add brief overview, authors,
+technologies, requirements, installation instructions.
+
+Zane Globus-O'Harra - 2023-05-05 - Add contact Zach W if installation or
+runtime problems occur. Minor layout update.
+
+## System Overview
+
 The purpose of this application is to act as a central repository for time series (TS) data. 
 Contributors will be able to upload their TS data along with a forecasting task for other users 
 to complete. 
@@ -8,7 +18,7 @@ Data scientists or machine learning engineers can download the TS training data 
 create some predicted data. The data scientists can upload their solution data and see how it 
 compares to the TS test data sets that the contributor uploaded.
 
-# Authors: 
+## Authors: 
 
 CS 422 at the University of Oregon 
 
@@ -89,11 +99,9 @@ Navigate to the webpage,
 If any issues occur while installing or running the application, please
 contact Zachary Weisenbloom at <zweisenb@uoregon.edu>.
 
+## Frontend Only Webapp
 
-### Revision History
-
-Zane Globus-O'Harra - 2023-05-04 - Add brief overview, authors,
-technologies, requirements, installation instructions.
-
-Zane Globus-O'Harra - 2023-05-05 - Add contact Zach W if installation or
-runtime problems occur.
+To run the app with all current functionality, follow the above
+instructions. To see our intended design, with ***no backend
+functionality***, navigate to 
+[this website](https://pages.uoregon.edu/estone3/webapp/userchoose.html).
